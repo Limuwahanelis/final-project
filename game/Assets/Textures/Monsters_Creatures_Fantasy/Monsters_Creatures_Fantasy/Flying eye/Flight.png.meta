@@ -1,0 +1,457 @@
+fileFormatVersion: 2
+guid: c529accddf3fc874aa253449c61284a6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4795363162621231457
+    second: Flight_0
+  - first:
+      213: -3652676412848291748
+    second: Flight_1
+  - first:
+      213: -596950462376016933
+    second: Flight_2
+  - first:
+      213: -4538786591655478766
+    second: Flight_3
+  - first:
+      213: 8639066506597270619
+    second: Flight_4
+  - first:
+      213: -4262185617143388622
+    second: Flight_5
+  - first:
+      213: 5066340549283584134
+    second: Flight_6
+  - first:
+      213: 7784096630628774620
+    second: Flight_7
+  - first:
+      213: 624892691946627188
+    second: Flight_8
+  - first:
+      213: -3066163259945249742
+    second: Flight_9
+  - first:
+      213: 6304285722794839683
+    second: Flight_10
+  - first:
+      213: -6020851179778265045
+    second: Flight_11
+  - first:
+      213: -6127659801541343650
+    second: Flight_12
+  - first:
+      213: 8473144466548620726
+    second: Flight_13
+  - first:
+      213: 1235745097543722082
+    second: Flight_14
+  - first:
+      213: 1395447935430839193
+    second: Flight_15
+  - first:
+      213: -1663004425147767626
+    second: Flight_16
+  - first:
+      213: -7619543786287605191
+    second: Flight_17
+  - first:
+      213: 7395353139714102588
+    second: Flight_18
+  - first:
+      213: 8191834697651946922
+    second: Flight_19
+  - first:
+      213: 7256810375371952046
+    second: Flight_20
+  - first:
+      213: 7635529016357484801
+    second: Flight_21
+  - first:
+      213: -5678831527699298490
+    second: Flight_22
+  - first:
+      213: 6300429006583397939
+    second: Flight_23
+  - first:
+      213: -5121139623081528473
+    second: Flight_24
+  - first:
+      213: 2735811877630694284
+    second: Flight_25
+  - first:
+      213: -515712395711139186
+    second: Flight_26
+  - first:
+      213: 6618564225216523641
+    second: Flight_27
+  - first:
+      213: 5370821748456563852
+    second: Flight_28
+  - first:
+      213: -7373887076935419383
+    second: Flight_29
+  - first:
+      213: -702453270087836675
+    second: Flight_30
+  - first:
+      213: 8858784794582212559
+    second: Flight_31
+  - first:
+      213: 5993448374035592139
+    second: Flight_32
+  - first:
+      213: 892921004157178649
+    second: Flight_33
+  - first:
+      213: 6063209261225771032
+    second: Flight_34
+  - first:
+      213: -5612430445827428351
+    second: Flight_35
+  - first:
+      213: -3149314306029929364
+    second: Flight_36
+  - first:
+      213: 1143798306708033210
+    second: Flight_37
+  - first:
+      213: -7776630106793735247
+    second: Flight_38
+  - first:
+      213: 2399548444339272347
+    second: Flight_39
+  - first:
+      213: 3543949431653151336
+    second: Flight_40
+  - first:
+      213: 498553051914972908
+    second: Flight_41
+  - first:
+      213: -650206880209060929
+    second: Flight_42
+  - first:
+      213: 5910022408782611125
+    second: Flight_43
+  - first:
+      213: -3205458680165071461
+    second: Flight_44
+  - first:
+      213: 4656645525570556070
+    second: Flight_45
+  - first:
+      213: 6330025265288458328
+    second: Flight_46
+  - first:
+      213: -2022082198115806228
+    second: Flight_47
+  - first:
+      213: -733291733561608295
+    second: Flight_48
+  - first:
+      213: 2891710218342689375
+    second: Flight_49
+  - first:
+      213: 1968645387816494043
+    second: Flight_50
+  - first:
+      213: 5902169778770746805
+    second: Flight_51
+  - first:
+      213: 2880717234965641135
+    second: Flight_52
+  - first:
+      213: -2413814711432465816
+    second: Flight_0
+  - first:
+      213: 8428950517639195108
+    second: Flight_1
+  - first:
+      213: 4772844889480914746
+    second: Flight_2
+  - first:
+      213: 5676879882571621726
+    second: Flight_3
+  - first:
+      213: -7489325608630659580
+    second: Flight_4
+  - first:
+      213: 5067580723476750495
+    second: Flight_5
+  - first:
+      213: -6257197626206487677
+    second: Flight_6
+  - first:
+      213: -657249154476012559
+    second: Flight_7
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flight_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 862b4731f48608ed0800000000000000
+      internalID: -2413814711432465816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_1
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e9aa3956d5a9f470800000000000000
+      internalID: 8428950517639195108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_2
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a376c8da32d8c3240800000000000000
+      internalID: 4772844889480914746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_3
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e552e310d2458ce40800000000000000
+      internalID: 5676879882571621726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_4
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40655520a02901890800000000000000
+      internalID: -7489325608630659580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90e27d91d9a35640800000000000000
+      internalID: 5067580723476750495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38b7b8839e7f929a0800000000000000
+      internalID: -6257197626206487677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flight_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fb0882506bf0e6f0800000000000000
+      internalID: -657249154476012559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
