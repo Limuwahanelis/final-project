@@ -21,6 +21,8 @@ public class Player : MonoBehaviour, IDamagable
     }
     private Cause NoControlCause=Cause.NONE;
 
+    public event Action OnWalkEvent;
+
     public LayerMask EnemyLayer;
     public LayerMask groundLayer;
     public LayerMask walkableLayers;
@@ -185,6 +187,7 @@ public class Player : MonoBehaviour, IDamagable
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 anim.SetBool("Run", true);
+                
                 if (canFlipSprite) toFlip.localScale = new Vector3(-1, toFlip.localScale.y, toFlip.localScale.z);
                 flipSide = -1;
                 xSpeed = -moveSpeed;
@@ -192,6 +195,7 @@ public class Player : MonoBehaviour, IDamagable
 
             if (isOnGround)
             {
+                if(Input.GetAxisRaw("Horizontal")!=0) OnWalkEvent?.Invoke();
                 anim.SetBool("InAir", false);
                 if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !slide)
                 {

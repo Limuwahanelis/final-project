@@ -14,12 +14,6 @@ public class MaxHPincreasePickUp : MonoBehaviour,IInteractable
         gameMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Interact()
     {
         gameMan.GetPlayer().GetComponent<PlayerHealthSystem>().IncreaseMaxHP(maxHPincrease);
