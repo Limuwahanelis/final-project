@@ -72,6 +72,5 @@ public class MinimapConfig : MonoBehaviour
     private void OnDestroy()
     {
         if (Time.frameCount == 0) return;
-        Debug.Log("dsa");
     }
 }

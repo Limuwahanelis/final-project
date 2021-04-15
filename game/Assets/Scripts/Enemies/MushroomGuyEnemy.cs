@@ -38,32 +38,39 @@ public class MushroomGuyEnemy : Enemy, IDamagable
         {
             if (isPatrollingLeft)
             {
-                anim.SetBool("isWalking", true);
-                transform.position = Vector3.MoveTowards(transform.position, patrolPos[0], speed * Time.deltaTime);
-                if (transform.position.x <= patrolPos[0].x)
-                {
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    isPatrollingRight = true;
-                    isPatrollingLeft = false;
-                    lastPatrol = 1;
-
-                }
+                MoveLeft();
             }
             if (isPatrollingRight)
             {
-                anim.SetBool("isWalking", true);
-                transform.position = Vector3.MoveTowards(transform.position, patrolPos[1], speed * Time.deltaTime);
-                if (transform.position.x >= patrolPos[1].x)
-                {
-                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-                    isPatrollingRight = false;
-                    isPatrollingLeft = true;
-                    lastPatrol = 0;
-                }
+                MoveRight();
             }
         }
     }
+    private void MoveLeft()
+    {
+        anim.SetBool("isWalking", true);
+        transform.position = Vector3.MoveTowards(transform.position, patrolPos[0], speed * Time.deltaTime);
+        if (transform.position.x <= patrolPos[0].x)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            isPatrollingRight = true;
+            isPatrollingLeft = false;
+            lastPatrol = 1;
 
+        }
+    }
+    private void MoveRight()
+    {
+        anim.SetBool("isWalking", true);
+        transform.position = Vector3.MoveTowards(transform.position, patrolPos[1], speed * Time.deltaTime);
+        if (transform.position.x >= patrolPos[1].x)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            isPatrollingRight = false;
+            isPatrollingLeft = true;
+            lastPatrol = 0;
+        }
+    }
     public void Kill()
     {
         IncreaseInvicibilityProgress();
