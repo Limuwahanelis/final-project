@@ -170,7 +170,7 @@ public class Player : MonoBehaviour, IDamagable
     void Update()
     {
         if (isAlive)
-        { 
+        {
             xSpeed = 0;
             FallsDown();
             CheckIfCanAirAttack();
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour, IDamagable
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
                 anim.SetBool("Run", true);
-                
+
                 if (canFlipSprite) toFlip.localScale = new Vector3(-1, toFlip.localScale.y, toFlip.localScale.z);
                 flipSide = -1;
                 xSpeed = -moveSpeed;
@@ -195,12 +195,12 @@ public class Player : MonoBehaviour, IDamagable
 
             if (isOnGround)
             {
-                if(Input.GetAxisRaw("Horizontal")!=0) OnWalkEvent?.Invoke();
+                if (Input.GetAxisRaw("Horizontal") != 0) OnWalkEvent?.Invoke();
                 anim.SetBool("InAir", false);
                 if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !slide)
                 {
                     isJumping = true;
-                   
+
                     anim.SetTrigger("Jump");
                 }
             }
@@ -210,7 +210,7 @@ public class Player : MonoBehaviour, IDamagable
                 anim.SetBool("InAir", true);
                 if (man.CheckIfAbilityIsUnlocked(GameManager.ability.WALLJHANGANDJUMP))
                 {
-                    if(wallHang.TouchesWall()&& xSpeed!=0 && wallHang.WallContactSide*xSpeed>0 && NoControlCause!=Cause.KNOCKBACK)
+                    if (wallHang.TouchesWall() && xSpeed != 0 && wallHang.WallContactSide * xSpeed > 0 && NoControlCause != Cause.KNOCKBACK)
                     {
                         Debug.Log("hang him");
                         canFlipSprite = false;
@@ -238,31 +238,6 @@ public class Player : MonoBehaviour, IDamagable
 
                         canFlipSprite = false;
                         slideDirection = flipSide;
-                    }
-                }
-                if (slide)
-                {
-                    if (isUnderCeilling)
-                    {
-                        isSlidingUnderCeiling = true;
-                        StopCoroutine(myCor);
-                    }
-                    else
-                    {
-                        if (isSlidingUnderCeiling)
-                        {
-                            slide = false;
-                            stopSliding = true;
-                            boxCol.isTrigger = false;
-                            capsuleColl.enabled = true;
-                            slideCol.enabled = false;
-                            EnemyDetectorCol.enabled = true;
-                            EnemyDetectorColSlide.enabled = false;
-                            ReturnControlToPlayer(Cause.SLIDE);
-                            anim.SetBool("Slide", false);
-                            canFlipSprite = true;
-                            isSlidingUnderCeiling = false;
-                        }
                     }
                 }
                 // air attack
@@ -305,12 +280,46 @@ public class Player : MonoBehaviour, IDamagable
                     }
                 }
                 // invicibility
-                if (Input.GetButtonDown("Invincibility")&& !wallHang.WallHanging)
+                if (Input.GetButtonDown("Invincibility") && !wallHang.WallHanging)
                 {
                     if (invincibility.CheckIfBarFull())
                     {
                         StartCoroutine(invincibility.InvincCor(sprite));
                     }
+                }
+            }
+            else
+            {
+                if (slide)
+                {
+                    if (isUnderCeilling)
+                    {
+                        isSlidingUnderCeiling = true;
+                        StopCoroutine(myCor);
+                    }
+                    else
+                    {
+                        if (isSlidingUnderCeiling)
+                        {
+                            slide = false;
+                            stopSliding = true;
+                            boxCol.isTrigger = false;
+                            capsuleColl.enabled = true;
+                            slideCol.enabled = false;
+                            EnemyDetectorCol.enabled = true;
+                            EnemyDetectorColSlide.enabled = false;
+                            ReturnControlToPlayer(Cause.SLIDE);
+                            anim.SetBool("Slide", false);
+                            canFlipSprite = true;
+                            isSlidingUnderCeiling = false;
+                        }
+                    }
+                }
+                if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && isOnGround && !wallHang.WallHanging)
+                {
+                    comboCount++;
+                    if (comboCount == 1) anim.SetBool("Attack1", true);
+                    TakeControlFromPlayer(Cause.ATTACK);
                 }
             }
         }
@@ -332,7 +341,7 @@ public class Player : MonoBehaviour, IDamagable
             if (temp > maxCombo)
             {
                 comboCount = 0;
-                for (int i = 0; i <= maxCombo; i++)
+                for (int i = 1; i <= maxCombo; i++)
                 {
                     anim.SetBool("Attack" + i, false);
                 }

@@ -3977,7 +3977,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainTheme: {fileID: 11400000, guid: 7e54b0cd65f3ff142be437ae0a946a8a, type: 2}
-  source: {fileID: 0}
 --- !u!1 &552261501
 GameObject:
   m_ObjectHideFlags: 0
@@ -14767,9 +14766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c69bab57bbe41e498881b0cdba0dd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
   walkingAudioEvent: {fileID: 11400000, guid: 9ed68e37433075d4a8692cb90d16a788, type: 2}
-  player: {fileID: 0}
 --- !u!82 &1114071456
 AudioSource:
   m_ObjectHideFlags: 0
@@ -99709,11 +99706,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.08
+      value: -7.12
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.44
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.z

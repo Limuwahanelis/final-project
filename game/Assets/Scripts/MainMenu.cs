@@ -13,6 +13,10 @@ public class MainMenu : MonoBehaviour
         public int resolutionIndex;
     }
 
+    static public MainMenu menu;
+    public GameObject controlPanel;
+    public GameObject optionsPanel;
+    public GameObject buttons;
     Resolution[] allResolutions;
     ResIndex currentResIndex;
     List<Resolution> resolutionsWithCurrentRefreshRate = new List<Resolution>();
@@ -134,10 +138,6 @@ public class MainMenu : MonoBehaviour
         return toReturn;
     }
 
-    static public MainMenu menu;
-    public GameObject controlPanel;
-    public GameObject optionsPanel;
-    public GameObject buttons;
     public void Awake()
     {
         menu = this;
