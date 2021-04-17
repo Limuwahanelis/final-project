@@ -17,7 +17,7 @@ public class DestructableGround : MonoBehaviour
     private bool destroyTiles = false;
     private Vector3Int firstTileToDestroy;
     private direction dir;
-    bool checkDir = false;
+    //bool checkDir = false;
     public GameObject explosion;
     public LayerMask bombLayer;
     // Start is called before the first frame update
@@ -69,7 +69,7 @@ public class DestructableGround : MonoBehaviour
                 dir = direction.DOWN;
             }
             destroyTiles = true;
-            checkDir = true;
+            //checkDir = true;
         //}
     }
     IEnumerator DestroyTilesRight()

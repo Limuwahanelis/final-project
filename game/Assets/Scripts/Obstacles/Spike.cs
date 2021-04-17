@@ -10,7 +10,7 @@ public class Spike : MonoBehaviour
         Debug.Log("spikesall");
         if (collision.transform.CompareTag("Player"))
         {
-            IDamagable player= collision.transform.GetComponent<Player>();
+            IDamagable player= collision.transform.GetComponent<PlayerCombat>();
             player.TakeDamage(dmg);
             player.Knockback();
             Debug.Log("spikes");

@@ -11,7 +11,7 @@ public class FallingBlock : MonoBehaviour
     private Rigidbody2D rb2D;
     private Vector3 startPos;
     private float moveBackSpeed;
-    private bool movingBack = false;
+    //private bool movingBack = false;
 
     
 

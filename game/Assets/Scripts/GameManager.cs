@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameOverScreen gameOverScreen;
-    public static GameManager control;
+    public static GameManager instance=null;
     public static GameObject player;
     public InvincibilityBar invBar;
     public GameObject[] abilityUnlocks;
@@ -27,12 +27,19 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        control = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         //DontDestroyOnLoad(this.gameObject);
         player = GameObject.FindGameObjectWithTag("Player");
-        //abilities[0] = true;
-        //abilities[1] = true;
-        //abilities[2] = true;
+        abilities[0] = true;
+        abilities[1] = true;
+        abilities[2] = true;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (Config.load) { Load(); Config.load = false; }
@@ -79,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log(player);
         Debug.Log(invBar);
-        PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>());
+        PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>(),player.GetComponent<PlayerCombat>());
         Debug.Log(playerData.maxHealth);
         string json = JsonUtility.ToJson(playerData);
 
@@ -120,7 +127,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerHealthSystem>().SetMaxHP(loadedData.maxHealth);
         player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
         player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
-        player.GetComponent<Player>().attackDamage = loadedData.damage;
+        player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
         invBar.SetFill(loadedData.invicibilityProgress);
 
         for(int i=0;i<3;i++)
@@ -157,7 +164,7 @@ public class GameManager : MonoBehaviour
         //player.GetComponent<PlayerHealthSystem>().hpBar.setMaxHealth(loadedData.maxHealth);
         player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
         player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
-        player.GetComponent<Player>().attackDamage = loadedData.damage;
+        player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
         invBar.SetFill(loadedData.invicibilityProgress);
 
         //for (int i = 0; i < 3; i++)
@@ -173,7 +180,7 @@ public class GameManager : MonoBehaviour
     public void SaveForBoss()
     {
         Debug.Log(Application.persistentDataPath);
-        PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>());
+        PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>(),player.GetComponent<PlayerCombat>());
         string json = JsonUtility.ToJson(playerData);
 
         File.WriteAllText(Application.persistentDataPath + "/BossSave.json", json);

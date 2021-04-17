@@ -37,7 +37,7 @@ public class DelayedBeam : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        collision.transform.GetComponentInParent<Player>().Knockback();
+        collision.transform.GetComponentInParent<PlayerCombat>().Knockback();
         collision.transform.GetComponentInParent<IDamagable>().TakeDamage(dmg);
     }
 }

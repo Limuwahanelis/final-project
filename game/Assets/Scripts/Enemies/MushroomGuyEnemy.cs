@@ -105,6 +105,10 @@ public class MushroomGuyEnemy : Enemy, IDamagable
     {
         hpSys.TakeDamage(dmg);
         anim.SetTrigger("hit");
+        if(!attack)
+        {
+            Rotate();
+        }
         if (hpSys.currentHP <= 0) Kill();
     }
 
@@ -122,5 +126,10 @@ public class MushroomGuyEnemy : Enemy, IDamagable
         isAttacking = false;
         if (lastPatrol == 0) isPatrollingLeft = true;
         else isPatrollingRight = true;
+    }
+
+    void Rotate()
+    {
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 }

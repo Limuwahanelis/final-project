@@ -20,7 +20,7 @@ public class AttackIncreasePickUp : MonoBehaviour,IInteractable
     }
     public void Interact()
     {
-        gameMan.GetPlayer().GetComponent<Player>().IncraseAttackDamage(attackIncrease);
+        gameMan.GetPlayer().GetComponent<PlayerCombat>().IncraseAttackDamage(attackIncrease);
         Destroy(this.gameObject);
     }
 

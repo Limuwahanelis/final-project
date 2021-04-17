@@ -40,7 +40,7 @@ public class WallHangAndJump : MonoBehaviour
 
     private bool isWallJumping;
 
-    private bool wallJump;
+    //private bool wallJump;
 
     private int contactSide;// 1 means right, -1 means left
     private int prevoiusContactSide=2;
@@ -71,7 +71,7 @@ public class WallHangAndJump : MonoBehaviour
             {
                 Debug.Log("Wall jump");
                 anim.SetBool("IsHanging", false);
-                wallJump = true;
+                //wallJump = true;
 
                 isWallJumping = true;
                 player.TakeControlFromPlayer(Player.Cause.WALLJUMP);
@@ -179,6 +179,6 @@ public class WallHangAndJump : MonoBehaviour
         prevoiusContactSide = contactSide;
 
         //flipXScale();
-        wallJump = false;
+        //wallJump = false;
     }
 }
