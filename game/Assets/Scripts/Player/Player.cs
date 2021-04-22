@@ -24,7 +24,6 @@ public class Player : MonoBehaviour//, IDamagable
 
     public event Action OnWalkEvent;
 
-    //public LayerMask EnemyLayer;
     public LayerMask groundLayer;
     public LayerMask walkableLayers;
 
@@ -34,26 +33,15 @@ public class Player : MonoBehaviour//, IDamagable
     public Rigidbody2D rb;
     private GameManager man;
     public WallHangAndJump wallHang;
-    //private PlayerHealthSystem hpSys;
-
-    //public GameObject bombPrefab;
-    //public Transform bombDropPos;
-    //public Transform attackPos;
-
-    //private bool isAlive = true;
-    //public float attackRange;
-    //public int attackDamage=20;
 
     private bool slowedDown = false;
 
-    //public float airAttackSpeed=4;
     public float dashSpeed = 5;
     public float moveSpeed = 1;
     public float jumpPower = 2;
 
     public Transform toFlip;
 
-    //public float knockbackTime;
 
     private bool isOnGround = false;
     public bool IsOnGround
@@ -75,9 +63,7 @@ public class Player : MonoBehaviour//, IDamagable
     private bool isJumping = false;
     private bool jump = false;
     private bool canFlipSprite = true;
-    //private bool isKnockable = true;
-    //private bool knocked = false;
-    //private bool isInvincible = false;
+
 
     // coliders
     public CapsuleCollider2D capsuleColl;
@@ -102,22 +88,8 @@ public class Player : MonoBehaviour//, IDamagable
     public float slideDuration = 1f;
     private bool stopSliding = false;
 
-
-    ////air attack
-    //private bool checkForColliders = false;
-    //private bool airAttack;
-    //private bool canAirAttack;
-    //private bool airAttackOverride; // if true, some outside objects prevents air attack
-    //private List<Collider2D> hitCollsDuringAirAttack = new List<Collider2D>();
-
-    // invincibility
     private Invincibility invincibility;
 
-    //Attacks
-    //[SerializeField]
-    //private int comboCount = 0;
-    //private int maxCombo = 2;
-    //public float maxComboDelay = 1f;
 
    
 
@@ -127,7 +99,6 @@ public class Player : MonoBehaviour//, IDamagable
     {
         combat = GetComponent<PlayerCombat>();
         rb = GetComponent<Rigidbody2D>();
-        //hpSys = GetComponent<PlayerHealthSystem>();
         invincibility = GetComponent<Invincibility>();
         man = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         wallHang = GetComponent<WallHangAndJump>();
@@ -140,12 +111,6 @@ public class Player : MonoBehaviour//, IDamagable
     {
         if (combat.IsPlayerAlive())
         {
-            //if (knocked)
-            //{
-            //    rb.velocity = new Vector2(0, 0);
-            //    rb.AddForce(new Vector2(-flipSide * 2, 2), ForceMode2D.Impulse);
-            //    knocked = false;
-            //}
             if (slide)
             {
                 rb.velocity = new Vector2(slideDirection * dashSpeed, 0);
@@ -196,33 +161,34 @@ public class Player : MonoBehaviour//, IDamagable
                 xSpeed = -moveSpeed;
             }
 
-            if (isOnGround)
-            {
-                if (Input.GetAxisRaw("Horizontal") != 0) OnWalkEvent?.Invoke();
-                anim.SetBool("InAir", false);
-                if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !slide)
-                {
-                    isJumping = true;
-
-                    anim.SetTrigger("Jump");
-                }
-            }
-            else
-            {
-                isJumping = false;
-                anim.SetBool("InAir", true);
-                if (man.CheckIfAbilityIsUnlocked(GameManager.ability.WALLJHANGANDJUMP))
-                {
-                    if (wallHang.TouchesWall() && xSpeed != 0 && wallHang.WallContactSide * xSpeed > 0 && NoControlCause != Cause.KNOCKBACK)
-                    {
-                        Debug.Log("hang him");
-                        canFlipSprite = false;
-                        wallHang.HangOnWall();
-                    }
-                }
-            }
+           
             if (!isNotMovableByPlayer)
             {
+                if (isOnGround)
+                {
+                    if (Input.GetAxisRaw("Horizontal") != 0) OnWalkEvent?.Invoke();
+                    anim.SetBool("InAir", false);
+                    if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !slide)
+                    {
+                        isJumping = true;
+
+                        anim.SetTrigger("Jump");
+                    }
+                }
+                else
+                {
+                    isJumping = false;
+                    anim.SetBool("InAir", true);
+                    if (man.CheckIfAbilityIsUnlocked(GameManager.ability.WALLJHANGANDJUMP))
+                    {
+                        if (wallHang.TouchesWall() && xSpeed != 0 && wallHang.WallContactSide * xSpeed > 0 && NoControlCause != Cause.KNOCKBACK)
+                        {
+                            Debug.Log("hang him");
+                            canFlipSprite = false;
+                            wallHang.HangOnWall();
+                        }
+                    }
+                }
                 // slide
                 if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.DownArrow) && xSpeed != 0 && !isJumping && isOnGround)
                 {

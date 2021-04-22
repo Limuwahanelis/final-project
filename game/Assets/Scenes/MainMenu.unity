@@ -217,6 +217,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 945701971}
+        m_TargetAssemblyTypeName: PlayerOptionsSaver, Assembly-CSharp
+        m_MethodName: SaveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &10492713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 126260310}
   - component: {fileID: 126260309}
+  - component: {fileID: 126260311}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -635,8 +648,6 @@ MonoBehaviour:
   controlPanel: {fileID: 1587928770}
   optionsPanel: {fileID: 516478035}
   buttons: {fileID: 570829729}
-  resolutionDropdown: {fileID: 774682156}
-  refreshRateDropdown: {fileID: 1778507634}
 --- !u!4 &126260310
 Transform:
   m_ObjectHideFlags: 0
@@ -652,6 +663,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &126260311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126260308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef1133dfc8ab8794a88f79e754f1f31c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 774682156}
+  refreshRateDropdown: {fileID: 1778507634}
+  fullScreenToggle: {fileID: 994212216}
 --- !u!1 &151255082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3007,8 +3033,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126260309}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 126260311}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
@@ -3068,6 +3094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 945701970}
   - component: {fileID: 945701969}
+  - component: {fileID: 945701971}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3088,7 +3115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 1114423561}
-  globalVolume: 0
+  globalVolume: 0.297
 --- !u!4 &945701970
 Transform:
   m_ObjectHideFlags: 0
@@ -3103,6 +3130,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945701971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945701968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53956a6faedae0d40bc72413c3709e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &994212214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3187,8 +3226,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126260309}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 126260311}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SetFullScreen
         m_Mode: 0
         m_Arguments:
@@ -3676,8 +3715,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1114423560}
   - component: {fileID: 1114423561}
+  - component: {fileID: 1114423562}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Global Volume slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3752,14 +3792,14 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.341
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 945701969}
-        m_TargetAssemblyTypeName: GlobalAudioManager, Assembly-CSharp
-        m_MethodName: SetGlobalVolume
-        m_Mode: 1
+      - m_Target: {fileID: 1114423562}
+        m_TargetAssemblyTypeName: MusicSlider, Assembly-CSharp
+        m_MethodName: SetVolume
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3768,6 +3808,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1114423562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114423559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d78a93c0b829d478aefc6dfb456d2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1395962350
 GameObject:
   m_ObjectHideFlags: 0
@@ -4738,8 +4790,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126260309}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 126260311}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SelectRefreshRate
         m_Mode: 0
         m_Arguments:

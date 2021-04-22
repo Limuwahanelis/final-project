@@ -9,6 +9,7 @@ public class CameraAudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GlobalAudioManager.OnGlobalVolumeChange += ChangeVolume;
         source = GetComponent<AudioSource>();
         mainTheme.Play(source);
     }
@@ -17,5 +18,11 @@ public class CameraAudioManager : MonoBehaviour
     void Update()
     {
        
+    }
+
+    public void ChangeVolume(float value)
+    {
+        Debug.Log("fire");
+        source.volume = value;
     }
 }

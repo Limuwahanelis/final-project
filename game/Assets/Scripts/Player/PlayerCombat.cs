@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerCombat : MonoBehaviour, IDamagable
 {
+
+
     private PlayerHealthSystem hpSys;
     Player player;
     Animator anim;
@@ -11,6 +13,9 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     private Rigidbody2D rb;
     public LayerMask EnemyLayer;
     private Invincibility invincibility;
+
+    public event Action OnAttackEvent;
+
     GameManager man;
     //air attack
     private bool checkForColliders = false;
@@ -107,10 +112,8 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 if (man.CheckIfAbilityIsUnlocked(GameManager.ability.BOMB))
                 {
                     player.TakeControlFromPlayer(Player.Cause.BOMB);
-                    //isNotMovableByPlayer = true;
                     anim.SetTrigger("Drop Bomb");
                     Instantiate(bombPrefab, bombDropPos.transform.position, bombPrefab.transform.rotation);
-                    //isNotMovableByPlayer = false;
                     player.ReturnControlToPlayer(Player.Cause.BOMB);
                 }
             }
@@ -122,6 +125,10 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 comboCount++;
                 if (comboCount == 1) anim.SetBool("Attack1", true);
                 player.TakeControlFromPlayer(Player.Cause.ATTACK);
+            }
+            if (checkForColliders)
+            {
+                DealDMG();
             }
         }
     }
@@ -263,7 +270,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     public void DealDMG()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, EnemyLayer);
-
+        Debug.Log("hiotdasda");
         for (int i = 0; i < hitEnemies.Length; i++)
         {
             if (airAttack)
@@ -293,5 +300,9 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     public bool IsPlayerAlive()
     {
         return isAlive;
+    }
+    public void InvokeAttackEvent()
+    {
+        OnAttackEvent?.Invoke();
     }
 }

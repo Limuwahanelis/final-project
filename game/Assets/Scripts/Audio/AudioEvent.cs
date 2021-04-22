@@ -5,10 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Audio Event")]
 public class AudioEvent : ScriptableObject
 {
-
     public AudioClip[] audioclips;
     [Range(0,1)]
     public float volume;
+
+
 
     public void Play(AudioSource audioSource)
     {
@@ -17,4 +18,5 @@ public class AudioEvent : ScriptableObject
         if (audioSource.isPlaying) return;
         audioSource.Play();
     }
+
 }

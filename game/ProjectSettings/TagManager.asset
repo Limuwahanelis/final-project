@@ -16,6 +16,7 @@ TagManager:
   - PlayerTWall
   - Minimap
   - Boss
+  - Volume Slider
   layers:
   - Default
   - TransparentFX
