@@ -90,9 +90,6 @@ public class Player : MonoBehaviour//, IDamagable
 
     private Invincibility invincibility;
 
-
-   
-
     // Start is called before the first frame update
 
     void Start()
@@ -120,11 +117,6 @@ public class Player : MonoBehaviour//, IDamagable
                 rb.velocity = new Vector2(0, rb.velocity.y);
                 stopSliding = false;
             }
-            //if (airAttack)
-            //{
-            //    rb.gravityScale = 0;
-            //    rb.velocity = new Vector2(airAttackSpeed * toFlip.localScale.x, 0);
-            //}
             if(jump)
             {
                 anim.SetBool("InAir", true);
@@ -209,45 +201,6 @@ public class Player : MonoBehaviour//, IDamagable
                         slideDirection = flipSide;
                     }
                 }
-                //// air attack
-                //if (Input.GetButtonDown("Attack") && !isOnGround && !wallHang.WallHanging)
-                //{
-                //    if (man.CheckIfAbilityIsUnlocked(GameManager.ability.AIRATTACK))
-                //    {
-                //        if (canAirAttack)
-                //        {
-                //            checkForColliders = true;
-                //            airAttack = true;
-                //            canFlipSprite = false;
-                //            EnemyDetectorCol.enabled = false;
-                //            anim.SetBool("AirAttack", true);
-                //            canAirAttack = false;
-                //            TakeControlFromPlayer(Cause.AIRATTACK);
-                //        }
-                //    }
-                //}
-                //if (checkForColliders)
-                //{
-                //    DealDMG();
-                //}
-                //// normal attack
-                //if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && isOnGround && !wallHang.WallHanging)
-                //{
-                //    comboCount++;
-                //    if (comboCount == 1) anim.SetBool("Attack1", true);
-                //    TakeControlFromPlayer(Cause.ATTACK);
-                //}
-                //// bomb drop
-                //if (Input.GetButtonDown("Attack") && Input.GetKey(KeyCode.DownArrow) && isOnGround && !wallHang.WallHanging && !slide)
-                //{
-                //    if (man.CheckIfAbilityIsUnlocked(GameManager.ability.BOMB))
-                //    {
-                //        isNotMovableByPlayer = true;
-                //        anim.SetTrigger("Drop Bomb");
-                //        Instantiate(bombPrefab, bombDropPos.transform.position, bombPrefab.transform.rotation);
-                //        isNotMovableByPlayer = false;
-                //    }
-                //}
                 // invicibility
                 if (Input.GetButtonDown("Invincibility") && !wallHang.WallHanging)
                 {
@@ -284,58 +237,9 @@ public class Player : MonoBehaviour//, IDamagable
                         }
                     }
                 }
-                //if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && isOnGround && !wallHang.WallHanging)
-                //{
-                //    comboCount++;
-                //    if (comboCount == 1) anim.SetBool("Attack1", true);
-                //    TakeControlFromPlayer(Cause.ATTACK);
-                //}
             }
         }
     }
-    //public void StopCombo(int attackNum)
-    //{
-    //    if (attackNum == comboCount)
-    //    {
-    //        for (int i = 1; i <= maxCombo; i++)
-    //        {
-    //            anim.SetBool("Attack" + i, false);
-    //        }
-    //        comboCount = 0;
-
-    //    }
-    //    if(comboCount>attackNum)
-    //    {
-    //        int temp = attackNum + 1;
-    //        if (temp > maxCombo)
-    //        {
-    //            comboCount = 0;
-    //            for (int i = 1; i <= maxCombo; i++)
-    //            {
-    //                anim.SetBool("Attack" + i, false);
-    //            }
-    //            ReturnControlToPlayer(Cause.ATTACK);
-    //            return;
-    //        }
-    //        else
-    //        {
-    //            anim.SetBool("Attack" + attackNum, false);
-    //            anim.SetBool("Attack" + temp, true);
-    //            comboCount = temp;
-    //        }
-    //    }
-    //    ReturnControlToPlayer(Cause.ATTACK);
-
-    //}
-    //public void BreakCombo()
-    //{
-    //    for (int i = 1; i <= maxCombo; i++)
-    //    {
-    //        anim.SetBool("Attack" + i, false);
-    //    }
-    //    comboCount = 0;
-    //}
-
     void Move()
     {
         if (isNotMovableByPlayer)
@@ -389,22 +293,6 @@ public class Player : MonoBehaviour//, IDamagable
         //Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    //IEnumerator PushBack()
-    //{
-    //   // canWallHang = false;/////////////////////
-    //    yield return new WaitForSeconds(knockbackTime);
-    //    ReturnControlToPlayer(Cause.KNOCKBACK);
-    //    yield return new WaitForSeconds(knockbackTime);
-    //    airAttackOverride = false;
-    //  //  canWallHang = true;/////////////////
-    //    isKnockable = true;
-    //}
-    //IEnumerator RemoveInvicibility()
-    //{
-    //    yield return new WaitForSeconds(2f);
-    //    isInvincible = false;
-    //}
-
     IEnumerator ApplySlow(float slow)
     {
         slowedDown = true;
@@ -428,64 +316,7 @@ public class Player : MonoBehaviour//, IDamagable
         anim.SetBool("Slide", false);
         canFlipSprite = true;
     }
-    //void AirAttackFunc()
-    //{
-    //    rb.velocity = new Vector2(0, 0);
-    //    if(!wallHang.WallHanging) rb.gravityScale = 2;
-    //    airAttack = false;
-    //    canFlipSprite = true;
-    //    anim.SetBool("AirAttack", false);
-    //    EnemyDetectorCol.enabled = true;
-    //    ReturnControlToPlayer(Cause.WALLJUMP);
-    //    ReturnControlToPlayer(Cause.AIRATTACK);
-    //    return;
-    //}
-    //public void TakeDamage(int dmg)
-    //{
-    //    if (isAlive)
-    //    {
-    //        if (isInvincible || invincibility.IsInvincible()) return;
-    //        hpSys.TakeDamage(dmg);
-    //        if (hpSys.currentHP <= 0) Kill();
-    //        isInvincible = true;
-    //        StartCoroutine(RemoveInvicibility());
-    //    }
-    //}
-    //public void Kill()
-    //{
-    //    isAlive = false;
-    //    isInvincible = true;
-    //    isKnockable = false;
-    //    rb.velocity = new Vector2(0, rb.velocity.y);
-    //    StopAllCoroutines();
-    //    anim.SetTrigger("Dead");
-    //    anim.SetBool("FallsDown", false);
-    //    man.ShowGameOverScreen();
-    //}
-    //public void Knockback()
-    //{
-       
-    //    if (!isKnockable || invincibility.IsInvincible()) return;
-    //    rb.velocity = new Vector2(0, 0);
-    //    airAttackOverride = true;
-    //    BreakCombo();
-    //    ReturnControlToPlayer(Cause.OVERRIDE);
-    //    isKnockable = false;
-    //    knocked = true;
-    //    TakeControlFromPlayer(Cause.KNOCKBACK);
-    //    StartCoroutine(PushBack());
-    //    StartCoroutine(RemoveInvicibility());
-    //}
-
-    //public void SlowDown(float slowDownFactorx, float slowDownFactory)
-    //{
-    //    if (!slowedDown)
-    //    {
-    //        StartCoroutine(ApplySlow(slowDownFactorx));
-    //    }
-    //}
-
-
+    
     public void ReturnControlToPlayer(Cause returnControlCause)
     {
         if (NoControlCause == Cause.NONE) return;
@@ -537,43 +368,7 @@ public class Player : MonoBehaviour//, IDamagable
     {
         toFlip.localScale = new Vector3(-toFlip.localScale.x, toFlip.localScale.y, toFlip.localScale.z);
     }
-    //void CheckIfCanAirAttack()
-    //{
-    //    if (!airAttackOverride)
-    //    {
-    //        if (isOnGround || wallHang.WallHanging) canAirAttack = true;
-    //    }
-    //    else canAirAttack = false;
-    //}
-    //public void DealDMG()
-    //{
-    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPos.position, attackRange, EnemyLayer);
-
-    //    for (int i = 0; i < hitEnemies.Length; i++)
-    //    {
-    //        if (airAttack)
-    //        {
-    //            if (!hitCollsDuringAirAttack.Contains(hitEnemies[i]))
-    //            {
-    //                hitEnemies[i].transform.GetComponentInParent<IDamagable>().TakeDamage(attackDamage);
-    //                hitCollsDuringAirAttack.Add(hitEnemies[i]);
-    //            }
-    //            else continue;
-    //        }
-    //        Debug.Log("hit");
-    //        hitEnemies[i].transform.GetComponentInParent<IDamagable>().TakeDamage(attackDamage);
-            
-    //    }
-
-    //}
-    //public void IncraseAttackDamage(int num)
-    //{
-    //    attackDamage += num;
-    //}
-    //public void StopCheckingForCollidersAirAttack()
-    //{
-    //    checkForColliders = false;
-    //}
+  
     public void FlipPlayer(int direction)
     {
         toFlip.localScale = new Vector3(direction, toFlip.localScale.y, toFlip.localScale.z);

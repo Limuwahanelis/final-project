@@ -87,7 +87,6 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                         checkForColliders = true;
                         airAttack = true;
                         player.SetCanFlipSprite(false);
-                        //canFlipSprite = false;
                         EnemyDetectorCol.enabled = false;
                         anim.SetBool("AirAttack", true);
                         canAirAttack = false;
