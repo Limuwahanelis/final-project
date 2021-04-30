@@ -9,7 +9,6 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     private PlayerHealthSystem hpSys;
     Player player;
     Animator anim;
-    WallHangAndJump wallHang;
     private Rigidbody2D rb;
     public LayerMask EnemyLayer;
     private Invincibility invincibility;
@@ -17,6 +16,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     public event Action OnAttackEvent;
 
     GameManager man;
+    PlayerStateManager playerStateManager;
     //air attack
     private bool checkForColliders = false;
     private bool airAttack;
@@ -52,8 +52,8 @@ public class PlayerCombat : MonoBehaviour, IDamagable
         rb = GetComponent<Rigidbody2D>();
         hpSys = GetComponent<PlayerHealthSystem>();
         invincibility = GetComponent<Invincibility>();
-        wallHang = GetComponent<WallHangAndJump>();
         man = GameManager.instance;
+        playerStateManager = GetComponent<PlayerStateManager>();
     }
 
     private void FixedUpdate()
@@ -78,7 +78,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
         {
             CheckIfCanAirAttack();
             // air attack
-            if (Input.GetButtonDown("Attack") && !player.IsOnGround && !wallHang.WallHanging)
+            if (Input.GetButtonDown("Attack") && !playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
             {
                 if (man.CheckIfAbilityIsUnlocked(GameManager.ability.AIRATTACK))
                 {
@@ -99,14 +99,14 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 DealDMG();
             }
             // normal attack
-            if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && player.IsOnGround && !wallHang.WallHanging)
+            if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
             {
                 comboCount++;
                 if (comboCount == 1) anim.SetBool("Attack1", true);
                 player.TakeControlFromPlayer(Player.Cause.ATTACK);
             }
             // bomb drop
-            if (Input.GetButtonDown("Attack") && Input.GetKey(KeyCode.DownArrow) && player.IsOnGround && !wallHang.WallHanging && !player.IsPlayerSliding())
+            if (Input.GetButtonDown("Attack") && Input.GetKey(KeyCode.DownArrow) && playerStateManager.isOnGround && !playerStateManager.isHangingOnWall && !player.IsPlayerSliding())
             {
                 if (man.CheckIfAbilityIsUnlocked(GameManager.ability.BOMB))
                 {
@@ -119,7 +119,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
         }
         else
         {
-            if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && player.IsOnGround && !wallHang.WallHanging)
+            if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
             {
                 comboCount++;
                 if (comboCount == 1) anim.SetBool("Attack1", true);
@@ -191,7 +191,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     void AirAttackFunc()
     {
         rb.velocity = new Vector2(0, 0);
-        if (!wallHang.WallHanging) rb.gravityScale = 2;
+        if (!playerStateManager.isHangingOnWall) rb.gravityScale = 2;
         airAttack = false;
         player.SetCanFlipSprite(true);
         //canFlipSprite = true;
@@ -244,12 +244,10 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     }
     IEnumerator PushBack()
     {
-        // canWallHang = false;/////////////////////
         yield return new WaitForSeconds(knockbackTime);
         player.ReturnControlToPlayer(Player.Cause.KNOCKBACK);
         yield return new WaitForSeconds(knockbackTime);
         airAttackOverride = false;
-        //  canWallHang = true;/////////////////
         isKnockable = true;
     }
     IEnumerator RemoveInvicibility()
@@ -262,7 +260,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     {
         if (!airAttackOverride)
         {
-            if (player.IsOnGround || wallHang.WallHanging) canAirAttack = true;
+            if (playerStateManager.isOnGround || playerStateManager.isHangingOnWall) canAirAttack = true;
         }
         else canAirAttack = false;
     }
@@ -296,10 +294,10 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     {
         return airAttack;
     }
-    public bool IsPlayerAlive()
-    {
-        return isAlive;
-    }
+    //public bool IsPlayerAlive()
+    //{
+    //    return isAlive;
+    //}
     public void InvokeAttackEvent()
     {
         OnAttackEvent?.Invoke();

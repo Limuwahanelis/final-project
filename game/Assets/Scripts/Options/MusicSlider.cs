@@ -10,11 +10,15 @@ public class MusicSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+
+    private void Awake()
+    {
         volumeSlider = GetComponent<Slider>();
         audioMan = GlobalAudioManager.instance;
         SetSlider();
     }
-
     // Update is called once per frame
     void Update()
     {

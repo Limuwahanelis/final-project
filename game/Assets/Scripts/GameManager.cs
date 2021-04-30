@@ -37,9 +37,9 @@ public class GameManager : MonoBehaviour
         }
         //DontDestroyOnLoad(this.gameObject);
         player = GameObject.FindGameObjectWithTag("Player");
-        abilities[0] = true;
-        abilities[1] = true;
-        abilities[2] = true;
+        //abilities[0] = true;
+        //abilities[1] = true;
+        //abilities[2] = true;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (Config.load) { Load(); Config.load = false; }

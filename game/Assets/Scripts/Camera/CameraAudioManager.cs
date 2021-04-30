@@ -23,6 +23,6 @@ public class CameraAudioManager : MonoBehaviour
     public void ChangeVolume(float value)
     {
         Debug.Log("fire");
-        source.volume = value;
+        source.volume = mainTheme.volume*value;
     }
 }

@@ -33,6 +33,7 @@ public class Player : MonoBehaviour//, IDamagable
     public Rigidbody2D rb;
     private GameManager man;
     public WallHangAndJump wallHang;
+    private PlayerStateManager playerStateManager;
 
     private bool slowedDown = false;
 
@@ -43,11 +44,11 @@ public class Player : MonoBehaviour//, IDamagable
     public Transform toFlip;
 
 
-    private bool isOnGround = false;
-    public bool IsOnGround
-    {
-        get { return isOnGround; }
-    }
+    //private bool isOnGround = false;
+    //public bool IsOnGround
+    //{
+    //    get { return isOnGround; }
+    //}
     private bool isUnderCeilling = false;
 
 
@@ -60,7 +61,6 @@ public class Player : MonoBehaviour//, IDamagable
     private int flipSide = 1; // 1 means right, -1 means left 
     private int slideDirection; // as above
     
-    private bool isJumping = false;
     private bool jump = false;
     private bool canFlipSprite = true;
 
@@ -82,9 +82,10 @@ public class Player : MonoBehaviour//, IDamagable
     public float floorCheckY;
 
     public Transform ceillingCheck;
+
     //slide
     private bool isSlidingUnderCeiling = false;
-    private bool slide = false;
+    private bool isSliding = false;
     public float slideDuration = 1f;
     private bool stopSliding = false;
 
@@ -99,23 +100,18 @@ public class Player : MonoBehaviour//, IDamagable
         invincibility = GetComponent<Invincibility>();
         man = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         wallHang = GetComponent<WallHangAndJump>();
-
+        playerStateManager = GetComponent<PlayerStateManager>();
 
     }
 
     
     void FixedUpdate()
     {
-        if (combat.IsPlayerAlive())
+        if (playerStateManager.isAlive)
         {
-            if (slide)
+            if (isSliding)
             {
                 rb.velocity = new Vector2(slideDirection * dashSpeed, 0);
-            }
-            if (stopSliding)
-            {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-                stopSliding = false;
             }
             if(jump)
             {
@@ -129,7 +125,7 @@ public class Player : MonoBehaviour//, IDamagable
     // Update is called once per frame
     void Update()
     {
-        if (combat.IsPlayerAlive())
+        if (playerStateManager.isAlive)
         {
             xSpeed = 0;
             FallsDown();
@@ -156,20 +152,18 @@ public class Player : MonoBehaviour//, IDamagable
            
             if (!isNotMovableByPlayer)
             {
-                if (isOnGround)
+                if (playerStateManager.isOnGround)
                 {
                     if (Input.GetAxisRaw("Horizontal") != 0) OnWalkEvent?.Invoke();
                     anim.SetBool("InAir", false);
-                    if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !slide)
+                    if (Input.GetButtonDown("Jump") && !Input.GetKey(KeyCode.DownArrow) && !isSliding)
                     {
-                        isJumping = true;
 
                         anim.SetTrigger("Jump");
                     }
                 }
                 else
                 {
-                    isJumping = false;
                     anim.SetBool("InAir", true);
                     if (man.CheckIfAbilityIsUnlocked(GameManager.ability.WALLJHANGANDJUMP))
                     {
@@ -182,9 +176,9 @@ public class Player : MonoBehaviour//, IDamagable
                     }
                 }
                 // slide
-                if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.DownArrow) && xSpeed != 0 && !isJumping && isOnGround)
+                if (Input.GetButtonDown("Jump") && Input.GetKey(KeyCode.DownArrow) && xSpeed != 0  && playerStateManager.isOnGround)
                 {
-                    if (!slide)
+                    if (!isSliding)
                     {
 
                         slideCol.enabled = true;
@@ -193,7 +187,7 @@ public class Player : MonoBehaviour//, IDamagable
                         EnemyDetectorColSlide.enabled = true;
                         boxCol.isTrigger = true;
                         anim.SetBool("Slide", true);
-                        slide = true;
+                        isSliding = true;
                         TakeControlFromPlayer(Cause.SLIDE);
                         myCor = StartCoroutine(SlideFunc());
 
@@ -202,7 +196,7 @@ public class Player : MonoBehaviour//, IDamagable
                     }
                 }
                 // invicibility
-                if (Input.GetButtonDown("Invincibility") && !wallHang.WallHanging)
+                if (Input.GetButtonDown("Invincibility") && !playerStateManager.isHangingOnWall)
                 {
                     if (invincibility.CheckIfBarFull())
                     {
@@ -212,7 +206,7 @@ public class Player : MonoBehaviour//, IDamagable
             }
             else
             {
-                if (slide)
+                if (isSliding)
                 {
                     if (isUnderCeilling)
                     {
@@ -223,16 +217,7 @@ public class Player : MonoBehaviour//, IDamagable
                     {
                         if (isSlidingUnderCeiling)
                         {
-                            slide = false;
-                            stopSliding = true;
-                            boxCol.isTrigger = false;
-                            capsuleColl.enabled = true;
-                            slideCol.enabled = false;
-                            EnemyDetectorCol.enabled = true;
-                            EnemyDetectorColSlide.enabled = false;
-                            ReturnControlToPlayer(Cause.SLIDE);
-                            anim.SetBool("Slide", false);
-                            canFlipSprite = true;
+                            StopSliding();
                             isSlidingUnderCeiling = false;
                         }
                     }
@@ -254,8 +239,8 @@ public class Player : MonoBehaviour//, IDamagable
 
     void OnGround()
     {
-        isOnGround = Physics2D.OverlapBox(groundCheck.position, new Vector2(floorCheckX, floorCheckY),0, walkableLayers);
-        if (isOnGround)
+        playerStateManager.isOnGround = Physics2D.OverlapBox(groundCheck.position, new Vector2(floorCheckX, floorCheckY),0, walkableLayers);
+        if (playerStateManager.isOnGround)
         {
             //contactSide = 0;/////////////////////////////////
         }
@@ -263,19 +248,11 @@ public class Player : MonoBehaviour//, IDamagable
         {
             if (myCor != null)
             {
-                if(slide && !isSlidingUnderCeiling)
+                if(isSliding && !isSlidingUnderCeiling)
                 {
                     StopCoroutine(myCor);
-                    slide = false;
-                    boxCol.isTrigger = false;
-                    stopSliding = true;
-                    capsuleColl.enabled = true;
-                    slideCol.enabled = false;
-                    EnemyDetectorCol.enabled = true;
-                    EnemyDetectorColSlide.enabled = false;
-                    ReturnControlToPlayer(Cause.SLIDE);
-                    anim.SetBool("Slide", false);
-                    canFlipSprite = true;
+                    StopSliding();
+
                 }
             }
         }
@@ -305,16 +282,7 @@ public class Player : MonoBehaviour//, IDamagable
     IEnumerator SlideFunc()
     {
         yield return new WaitForSeconds(slideDuration);
-        slide = false;
-        stopSliding = true;
-        boxCol.isTrigger = false;
-        capsuleColl.enabled = true;
-        slideCol.enabled = false;
-        EnemyDetectorCol.enabled = true;
-        EnemyDetectorColSlide.enabled = false;
-        ReturnControlToPlayer(Cause.SLIDE);
-        anim.SetBool("Slide", false);
-        canFlipSprite = true;
+        StopSliding();
     }
     
     public void ReturnControlToPlayer(Cause returnControlCause)
@@ -352,7 +320,7 @@ public class Player : MonoBehaviour//, IDamagable
     }
     void FallsDown()
     {
-        if (rb.velocity.y < 0 && !isOnGround &&!combat.IsAirAttacking())
+        if (rb.velocity.y < 0 && !playerStateManager.isOnGround &&!combat.IsAirAttacking())
         {
             anim.SetBool("FallsDown", true);
         }
@@ -398,6 +366,21 @@ public class Player : MonoBehaviour//, IDamagable
 
     public bool IsPlayerSliding()
     {
-        return slide;
+        return isSliding;
+    }
+
+    void StopSliding()
+    {
+        isSliding = false;
+        stopSliding = true;
+        boxCol.isTrigger = false;
+        capsuleColl.enabled = true;
+        slideCol.enabled = false;
+        EnemyDetectorCol.enabled = true;
+        EnemyDetectorColSlide.enabled = false;
+        ReturnControlToPlayer(Cause.SLIDE);
+        anim.SetBool("Slide", false);
+        canFlipSprite = true;
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }
 }
