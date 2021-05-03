@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f46e0f6101347141bd53c8d993e614a, type: 3}
   m_Name: Explosion
   m_EditorClassIdentifier: 
-  volume: 1
-  pitch: 0.858
+  volume: 0.415
+  pitch: 0.879
   audioClip: {fileID: 8300000, guid: b725a669c7bff7a44b209801ff8f2d01, type: 3}

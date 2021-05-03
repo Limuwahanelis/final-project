@@ -3114,7 +3114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1b4536d6fd1e240805913b970a08f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 1114423561}
   globalVolume: 0.297
 --- !u!4 &945701970
 Transform:

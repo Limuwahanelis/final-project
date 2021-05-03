@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.IO;
 public class MusicSlider : MonoBehaviour
 {
     Slider volumeSlider;
@@ -17,6 +17,7 @@ public class MusicSlider : MonoBehaviour
     {
         volumeSlider = GetComponent<Slider>();
         audioMan = GlobalAudioManager.instance;
+        LoadSettings();
         SetSlider();
     }
     // Update is called once per frame
@@ -33,5 +34,14 @@ public class MusicSlider : MonoBehaviour
     public void SetVolume(float value)
     {
         audioMan.SetGlobalVolume(value);
+    }
+    public void LoadSettings()
+    {
+        if (!File.Exists(Application.persistentDataPath + "/settings.json")) return;
+
+        string json = File.ReadAllText(Application.persistentDataPath + "/settings.json");
+        SettingsData loadedSettings = JsonUtility.FromJson<SettingsData>(json);
+
+        volumeSlider.value = loadedSettings.globalVolume;
     }
 }

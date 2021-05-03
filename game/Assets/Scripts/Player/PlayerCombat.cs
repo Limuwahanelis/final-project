@@ -134,6 +134,23 @@ public class PlayerCombat : MonoBehaviour, IDamagable
             {
                 DealDMG();
             }
+            // air attack
+            if (Input.GetButtonDown("Attack") && !playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
+            {
+                if (man.CheckIfAbilityIsUnlocked(GameManager.ability.AIRATTACK))
+                {
+                    if (canAirAttack)
+                    {
+                        checkForColliders = true;
+                        airAttack = true;
+                        player.SetCanFlipSprite(false);
+                        EnemyDetectorCol.enabled = false;
+                        anim.SetBool("AirAttack", true);
+                        canAirAttack = false;
+                        player.TakeControlFromPlayer(Player.Cause.AIRATTACK);
+                    }
+                }
+            }
         }
     }
 

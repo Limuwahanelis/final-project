@@ -84,19 +84,15 @@ public class GameManager : MonoBehaviour
     }
     public void Save()
     {
-        Debug.Log(player);
-        Debug.Log(invBar);
+
         PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>(),player.GetComponent<PlayerCombat>());
-        Debug.Log(playerData.maxHealth);
         string json = JsonUtility.ToJson(playerData);
 
         File.WriteAllText(Application.persistentDataPath + "/saves.json", json);
-        Debug.Log(Application.persistentDataPath);
         SaveStageState();
     }
     public void SaveStageState()
     {
-        Debug.Log(Application.persistentDataPath);
         StageStateData stageData = new StageStateData(puzzleStates);
         string json = JsonUtility.ToJson(stageData);
         File.WriteAllText(Application.persistentDataPath + "/stageState.json", json);
@@ -104,7 +100,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadStageState()
     {
-        Debug.Log(Application.persistentDataPath);
         string json = File.ReadAllText(Application.persistentDataPath + "/stageState.json");
         StageStateData stageData = JsonUtility.FromJson<StageStateData>(json);
         puzzleStates[0] = stageData.puzzle1Solved;
@@ -116,10 +111,8 @@ public class GameManager : MonoBehaviour
     }
     public void Load()
     {
-        Debug.Log("aa");
         string json= File.ReadAllText(Application.persistentDataPath + "/saves.json");
         PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
-        Debug.Log(loadedData.maxHealth);
         player.transform.position = new Vector3(loadedData.position[0], loadedData.position[1]);
         abilities[(int)ability.AIRATTACK] = loadedData.abilities[(int)ability.AIRATTACK];
         abilities[(int)ability.BOMB] = loadedData.abilities[(int)ability.BOMB];
@@ -142,7 +135,6 @@ public class GameManager : MonoBehaviour
         SaveForBoss();
         SceneManager.LoadScene(2);
         StartCoroutine( WaitForSceneToLoad(2));
-        //Debug.Log("loa + "+SceneManager.GetActiveScene().name);
 
     }
 
@@ -153,24 +145,17 @@ public class GameManager : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
         Debug.Log(json);
         PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
-        //player.transform.position = new Vector3(loadedData.position[0], loadedData.position[1]);
         abilities[(int)ability.AIRATTACK] = loadedData.abilities[(int)ability.AIRATTACK];
         abilities[(int)ability.BOMB] = loadedData.abilities[(int)ability.BOMB];
         abilities[(int)ability.WALLJHANGANDJUMP] = loadedData.abilities[(int)ability.WALLJHANGANDJUMP];
-        //player = GameObject.FindGameObjectWithTag("Player");
         Debug.Log("Player is" + player);
         Debug.Log("invBar is" + invBar);
         player.GetComponent<PlayerHealthSystem>().SetMaxHP(loadedData.maxHealth);
-        //player.GetComponent<PlayerHealthSystem>().hpBar.setMaxHealth(loadedData.maxHealth);
         player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
         player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
         player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
         invBar.SetFill(loadedData.invicibilityProgress);
 
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    if (abilities[i]) Destroy(abilityUnlocks[i]);
-        //}
         Boss a = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
         Debug.Log("Boss is " + a);
         a.SetAttack();
@@ -179,7 +164,6 @@ public class GameManager : MonoBehaviour
     }
     public void SaveForBoss()
     {
-        Debug.Log(Application.persistentDataPath);
         PlayerData playerData = new PlayerData(player.GetComponent<Player>(), abilities, invBar.GetFillAmount(), player.GetComponent<PlayerHealthSystem>(),player.GetComponent<PlayerCombat>());
         string json = JsonUtility.ToJson(playerData);
 
