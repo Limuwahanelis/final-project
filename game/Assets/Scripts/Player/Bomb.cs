@@ -15,7 +15,7 @@ public class Bomb : MonoBehaviour
     private bool explode;
     private bool startCountDown;
 
-    public static Action OnExplodeEvent;
+    public Action OnExplodeEvent;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -33,6 +33,7 @@ public class Bomb : MonoBehaviour
                     anim.SetTrigger("Explode");
                     Debug.Log("Exlosion");
                     explode = true;
+                    OnExplodeEvent?.Invoke();
                 }
             }
         }
@@ -67,7 +68,7 @@ public class Bomb : MonoBehaviour
             if(colliders[i].gameObject.GetComponent<DestructableGround>())
             {
                 Collider2D col = colliders[i];
-                colliders[i].gameObject.GetComponent<DestructableGround>().Destroy(colC.radius,transform.position);
+                colliders[i].gameObject.GetComponent<DestructableGround>().DestroyTiles(colC.radius,transform.position);
                 return;
             }
         }
