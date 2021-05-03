@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class MushroomGuyEnemy : Enemy, IDamagable
 {
     public float attackDelay = 3f;
@@ -50,6 +50,7 @@ public class MushroomGuyEnemy : Enemy, IDamagable
     {
         anim.SetBool("isWalking", true);
         transform.position = Vector3.MoveTowards(transform.position, patrolPos[0], speed * Time.deltaTime);
+        //RaiseOnWalkEvent();
         if (transform.position.x <= patrolPos[0].x)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -63,6 +64,7 @@ public class MushroomGuyEnemy : Enemy, IDamagable
     {
         anim.SetBool("isWalking", true);
         transform.position = Vector3.MoveTowards(transform.position, patrolPos[1], speed * Time.deltaTime);
+        //RaiseOnWalkEvent();
         if (transform.position.x >= patrolPos[1].x)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -118,7 +120,7 @@ public class MushroomGuyEnemy : Enemy, IDamagable
         yield return new WaitForSeconds(attackDelay);
         
         anim.SetTrigger("Attack");
-        
+        RaiseOnAttackEvent();
         
     }
     public void EndAttack()

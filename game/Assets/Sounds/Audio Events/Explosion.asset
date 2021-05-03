@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f46e0f6101347141bd53c8d993e614a, type: 3}
-  m_Name: PlayerWalk
+  m_Name: Explosion
   m_EditorClassIdentifier: 
-  volume: 0.157
-  pitch: 1
-  audioClip: {fileID: 8300000, guid: 2b235ae7d3260304c8c46dd635969e88, type: 3}
+  volume: 1
+  pitch: 0.858
+  audioClip: {fileID: 8300000, guid: b725a669c7bff7a44b209801ff8f2d01, type: 3}

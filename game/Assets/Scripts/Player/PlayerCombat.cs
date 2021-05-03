@@ -44,6 +44,8 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     private bool isInvincible = false;
 
     private bool isAlive=true;
+
+    bool isAttackOnCooldown = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -101,9 +103,12 @@ public class PlayerCombat : MonoBehaviour, IDamagable
             // normal attack
             if (Input.GetButtonDown("Attack") && !Input.GetKey(KeyCode.DownArrow) && playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
             {
-                comboCount++;
-                if (comboCount == 1) anim.SetBool("Attack1", true);
-                player.TakeControlFromPlayer(Player.Cause.ATTACK);
+                if (!isAttackOnCooldown)
+                {
+                    comboCount++;
+                    if (comboCount == 1) anim.SetBool("Attack1", true);
+                    player.TakeControlFromPlayer(Player.Cause.ATTACK);
+                }
             }
             // bomb drop
             if (Input.GetButtonDown("Attack") && Input.GetKey(KeyCode.DownArrow) && playerStateManager.isOnGround && !playerStateManager.isHangingOnWall && !player.IsPlayerSliding())
@@ -141,7 +146,9 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 anim.SetBool("Attack" + i, false);
             }
             comboCount = 0;
+            if(attackNum==1) StartCoroutine(PlayerAttackCooldownCor());
 
+                player.ReturnControlToPlayer(Player.Cause.ATTACK);
         }
         if (comboCount > attackNum)
         {
@@ -163,7 +170,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 comboCount = temp;
             }
         }
-        player.ReturnControlToPlayer(Player.Cause.ATTACK);
+        //player.ReturnControlToPlayer(Player.Cause.ATTACK);
 
     }
     public void BreakCombo()
@@ -254,6 +261,14 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     {
         yield return new WaitForSeconds(2f);
         isInvincible = false;
+    }
+
+    IEnumerator PlayerAttackCooldownCor()
+    {
+        if (isAttackOnCooldown) yield break;
+        isAttackOnCooldown = true;
+        yield return new WaitForSeconds(1f);
+        isAttackOnCooldown = false;
     }
 
     void CheckIfCanAirAttack()

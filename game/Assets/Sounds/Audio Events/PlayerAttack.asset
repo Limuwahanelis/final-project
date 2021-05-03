@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97bb6cbfc75cb1646add69707d7a40bb, type: 3}
   m_Name: PlayerAttack
   m_EditorClassIdentifier: 
-  volume: 0
-  pitch: 0
-  audioclips: []
+  volume: 0.677
+  pitch: 0.5
+  audioclips:
+  - {fileID: 8300000, guid: 49b6ff6864374a84882eb6eb4638a707, type: 3}
+  - {fileID: 8300000, guid: 6c1b1828908342740ba74e7cacc7f08b, type: 3}
+  - {fileID: 8300000, guid: b538305c3c8d842489deb29542fc7054, type: 3}

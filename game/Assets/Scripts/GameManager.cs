@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameOverScreen gameOverScreen;
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool[] abilities = new bool[3];
     public bool playerIsAlive=true;
+
+    public Text messageTex;
+
     public enum ability
     {
         WALLJHANGANDJUMP, AIRATTACK, BOMB
@@ -35,11 +39,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //DontDestroyOnLoad(this.gameObject);
         player = GameObject.FindGameObjectWithTag("Player");
-        //abilities[0] = true;
-        //abilities[1] = true;
-        //abilities[2] = true;
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             if (Config.load) { Load(); Config.load = false; }
@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             Debug.Log("loa 2+ " + SceneManager.GetActiveScene().name);
-            //invBar = GameObject.FindGameObjectWithTag("Invicibility Bar").GetComponent<InvincibilityBar>();
-            //player = GameObject.FindGameObjectWithTag("Player");
             LoadForBoss();
         }
         Debug.Log(player);
@@ -60,24 +58,26 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //save();
-        }
-    }
-
     public GameObject GetPlayer()
     {
         return player;
     }
-    public void UnlockAbility(ability ab)
+    public void UnlockAbility(ability ab,string abilityText)
     {
         abilities[(int)ab] = true;
+        SetMessage(abilityText);
     }
-
+    public void SetMessage(string message)
+    {
+        messageTex.text = message;
+        StartCoroutine(MessageCor());
+    }
+    IEnumerator MessageCor()
+    {
+        messageTex.enabled = true;
+        yield return new WaitForSeconds(2f);
+        messageTex.enabled = false;
+    }
     public bool CheckIfAbilityIsUnlocked(ability ab)
     {
         return abilities[(int)ab];

@@ -17,6 +17,7 @@ TagManager:
   - Minimap
   - Boss
   - Volume Slider
+  - Information Box
   layers:
   - Default
   - TransparentFX

@@ -43,12 +43,6 @@ public class Player : MonoBehaviour//, IDamagable
 
     public Transform toFlip;
 
-
-    //private bool isOnGround = false;
-    //public bool IsOnGround
-    //{
-    //    get { return isOnGround; }
-    //}
     private bool isUnderCeilling = false;
 
 
@@ -87,7 +81,7 @@ public class Player : MonoBehaviour//, IDamagable
     private bool isSlidingUnderCeiling = false;
     private bool isSliding = false;
     public float slideDuration = 1f;
-    private bool stopSliding = false;
+    //private bool stopSliding = false;
 
     private Invincibility invincibility;
 
@@ -129,7 +123,6 @@ public class Player : MonoBehaviour//, IDamagable
         {
             xSpeed = 0;
             FallsDown();
-            //CheckIfCanAirAttack();
             UnderCeiling();
             OnGround();
             anim.SetBool("Run", false);
@@ -149,7 +142,6 @@ public class Player : MonoBehaviour//, IDamagable
                 xSpeed = -moveSpeed;
             }
 
-           
             if (!isNotMovableByPlayer)
             {
                 if (playerStateManager.isOnGround)
@@ -372,7 +364,6 @@ public class Player : MonoBehaviour//, IDamagable
     void StopSliding()
     {
         isSliding = false;
-        stopSliding = true;
         boxCol.isTrigger = false;
         capsuleColl.enabled = true;
         slideCol.enabled = false;

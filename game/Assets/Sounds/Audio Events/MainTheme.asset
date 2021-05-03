@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f46e0f6101347141bd53c8d993e614a, type: 3}
   m_Name: MainTheme
   m_EditorClassIdentifier: 
-  volume: 0.144
+  volume: 0.071
   pitch: 1
   audioClip: {fileID: 8300000, guid: 83cfcb26d4853844db91a4eddbdefc7e, type: 3}

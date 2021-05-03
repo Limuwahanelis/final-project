@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Bomb : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,20 +11,19 @@ public class Bomb : MonoBehaviour
     private float countDownStartTime;
     public CircleCollider2D colC;
     private Collider2D[] colliders;
-    public float radius;
     private bool touchedGround = false;
     private bool explode;
     private bool startCountDown;
+
+    public static Action OnExplodeEvent;
     void Start()
     {
         anim = GetComponent<Animator>();
-        //col = GetComponentInChildren<CircleCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //checkForDestructable();
         if (startCountDown)
         {
             if (!explode)
@@ -50,10 +49,6 @@ public class Bomb : MonoBehaviour
                 Debug.Log("Start");
                 touchedGround = true;
             }
-            //if(collision.collider.CompareTag("DestructableGround"))
-            //{
-            //    collision.left
-            //}
         }
     }
 
@@ -66,7 +61,7 @@ public class Bomb : MonoBehaviour
     }
     public void CheckForDestructable()
     {
-        colliders=Physics2D.OverlapCircleAll(transform.position, radius);
+        colliders=Physics2D.OverlapCircleAll(transform.position, colC.radius);
         for(int i=0;i<colliders.Length;i++)
         {
             if(colliders[i].gameObject.GetComponent<DestructableGround>())
@@ -78,4 +73,10 @@ public class Bomb : MonoBehaviour
         }
 
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, colC.radius);
+    }
+
 }

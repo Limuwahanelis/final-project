@@ -7,7 +7,7 @@ public class AbilityUnlock : MonoBehaviour
     private GameManager man;
     public GameManager.ability abilityToUnlock;
     public Animator anim;
-
+    public string message;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class AbilityUnlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        man.UnlockAbility(abilityToUnlock);
+        man.UnlockAbility(abilityToUnlock,message);
         Destroy(gameObject);
     }
 }

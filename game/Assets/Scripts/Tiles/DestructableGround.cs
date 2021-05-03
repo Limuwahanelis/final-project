@@ -17,12 +17,18 @@ public class DestructableGround : MonoBehaviour
     private bool destroyTiles = false;
     private Vector3Int firstTileToDestroy;
     private direction dir;
-    //bool checkDir = false;
     public GameObject explosion;
     public LayerMask bombLayer;
+
+    public AudioEvent explosionSound;
+    private AudioSource audioSource;
+
+    public float destructionDelay = 0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponentInParent<AudioSource>();
         map = GetComponent<Tilemap>();
         map.SetTile(map.WorldToCell(Vector3.zero), null);
     }
@@ -45,32 +51,23 @@ public class DestructableGround : MonoBehaviour
 
     public void Destroy(float triggerRadius, Vector3 bombPos)
     {
-       // Debug.Log(collision.gameObject.layer);
-       // if (collision.gameObject.layer == 14)
-       // {
-            Debug.Log("expl");
-            //float triggerRadius = collision.gameObject.GetComponent<CircleCollider2D>().radius;
+        if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x - triggerRadius, bombPos.y, 0))))
+        {
+            firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x - triggerRadius, bombPos.y, 0));
+            dir = direction.LEFT;
+        }
+        if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x + triggerRadius, bombPos.y, 0))))
+        {
+            firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x + triggerRadius, bombPos.y, 0));
+            dir = direction.RIGHT;
+        }
+        if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x, bombPos.y - triggerRadius, 0))))
+        {
+            firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x, bombPos.y - triggerRadius, 0));
+            dir = direction.DOWN;
+        }
+        destroyTiles = true;
 
-            //Vector3 bombPos = collision.transform.position;
-
-            if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x - triggerRadius, bombPos.y, 0))))
-            {
-                firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x - triggerRadius, bombPos.y, 0));
-                dir = direction.LEFT;
-            }
-            if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x + triggerRadius, bombPos.y, 0))))
-            {
-                firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x + triggerRadius, bombPos.y, 0));
-                dir = direction.RIGHT;
-            }
-            if (map.GetTile(map.WorldToCell(new Vector3(bombPos.x, bombPos.y - triggerRadius, 0))))
-            {
-                firstTileToDestroy = map.WorldToCell(new Vector3(bombPos.x, bombPos.y - triggerRadius, 0));
-                dir = direction.DOWN;
-            }
-            destroyTiles = true;
-            //checkDir = true;
-        //}
     }
     IEnumerator DestroyTilesRight()
     {
@@ -146,11 +143,13 @@ public class DestructableGround : MonoBehaviour
 
     void DestroyTileAtCellPos(Vector3Int cellPos)
     {
+        AudioSource audioSourceTmp = gameObject.AddComponent<AudioSource>();
         int explosionsNum = 2;
         GameObject[] explosions = new GameObject[explosionsNum];
         for (int i = 0; i < explosionsNum; i++)
         {
             explosions[i] = Instantiate(explosion, map.CellToWorld(cellPos) + new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f)), explosion.transform.rotation, transform);
+            explosionSound.Play(audioSourceTmp);
             Destroy(explosions[i], 1f);
         }
 
