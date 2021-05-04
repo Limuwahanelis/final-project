@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
@@ -55,4 +54,12 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ShowPanel(GameObject panelToShow) 
+    {
+        panelToShow.SetActive(true);
+    }
+    public void HidePanel(GameObject panelToHide)
+    {
+        panelToHide.SetActive(false);
+    }
 }

@@ -34,25 +34,33 @@ public class SpiderEnemy : Enemy,IDamagable
         //anim.SetBool()
         if(isPatrollingLeft)
         {
-            anim.SetBool("isWalking", true);
-            transform.position=Vector3.MoveTowards(transform.position, patrolPos[0], speed * Time.deltaTime);
-            if (transform.position.x <= patrolPos[0].x)
-            {
-                rend.flipX = true;
-                isPatrollingRight = true;
-                isPatrollingLeft = false;
-            }
+            MoveLeft();
         }
         if (isPatrollingRight)
         {
-            anim.SetBool("isWalking", true);
-            transform.position= Vector3.MoveTowards(transform.position ,patrolPos[1], speed*Time.deltaTime);
-            if (transform.position.x >= patrolPos[1].x)
-            {
-                rend.flipX = false;
-                isPatrollingRight = false;
-                isPatrollingLeft = true; ;
-            }
+            MoveRight();
+        }
+    }
+    void MoveRight()
+    {
+        anim.SetBool("isWalking", true);
+        transform.position = Vector3.MoveTowards(transform.position, patrolPos[1], speed * Time.deltaTime);
+        if (transform.position.x >= patrolPos[1].x)
+        {
+            rend.flipX = false;
+            isPatrollingRight = false;
+            isPatrollingLeft = true; ;
+        }
+    }
+    void MoveLeft()
+    {
+        anim.SetBool("isWalking", true);
+        transform.position = Vector3.MoveTowards(transform.position, patrolPos[0], speed * Time.deltaTime);
+        if (transform.position.x <= patrolPos[0].x)
+        {
+            rend.flipX = true;
+            isPatrollingRight = true;
+            isPatrollingLeft = false;
         }
     }
     public  void TakeDamage(int dmg)

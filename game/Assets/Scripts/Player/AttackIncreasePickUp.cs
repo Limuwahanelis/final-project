@@ -7,6 +7,7 @@ public class AttackIncreasePickUp : MonoBehaviour,IInteractable
     private GameManager gameMan;
     public int attackIncrease;
     public GameObject canvas;
+    public string pickUpMessage;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,8 @@ public class AttackIncreasePickUp : MonoBehaviour,IInteractable
     }
     public void Interact()
     {
-        gameMan.GetPlayer().GetComponent<Player>().IncraseAttackDamage(attackIncrease);
+        gameMan.GetPlayer().GetComponent<PlayerCombat>().IncraseAttackDamage(attackIncrease);
+        gameMan.SetMessage(pickUpMessage);
         Destroy(this.gameObject);
     }
 

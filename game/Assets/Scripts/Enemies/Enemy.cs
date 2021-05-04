@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(HealthSystem))]
 public abstract class Enemy : MonoBehaviour
@@ -15,10 +16,22 @@ public abstract class Enemy : MonoBehaviour
     public float speed;
     public int dmg;
 
+    public event Action OnWalkEvent;
+    public event Action OnAttackEvent;
+
     public abstract void SetPlayerInRange();
     public abstract void SetPlayerNotInRange();
     public void IncreaseInvicibilityProgress()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<Invincibility>().IncreaseProgress(invicibilityProgress);
+    }
+
+    protected void RaiseOnWalkEvent()
+    {
+        OnWalkEvent?.Invoke();
+    }
+    protected void RaiseOnAttackEvent()
+    {
+        OnWalkEvent?.Invoke();
     }
 }

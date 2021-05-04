@@ -8,29 +8,26 @@ public class MaxHPincreasePickUp : MonoBehaviour,IInteractable
     private GameManager gameMan;
     public int maxHPincrease;
     public GameObject canvas;
+    public string pickUpMessage;
     // Start is called before the first frame update
     void Start()
     {
         gameMan = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Interact()
     {
         gameMan.GetPlayer().GetComponent<PlayerHealthSystem>().IncreaseMaxHP(maxHPincrease);
         Debug.Log("interact");
+        gameMan.SetMessage(pickUpMessage);
         Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            canvas.SetActive(true);
-            gameMan.GetPlayer().GetComponent<PlayerInteract>().setObjectToInteract(this);
+        canvas.SetActive(true);
+        gameMan.GetPlayer().GetComponent<PlayerInteract>().setObjectToInteract(this);
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

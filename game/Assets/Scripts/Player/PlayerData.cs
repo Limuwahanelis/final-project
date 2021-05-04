@@ -12,7 +12,7 @@ public class PlayerData
     public bool[] abilities;
     public float invicibilityProgress;
 
-    public PlayerData(Player player,bool[] ab,float progress,PlayerHealthSystem playerHealth)
+    public PlayerData(Player player,bool[] ab,float progress,PlayerHealthSystem playerHealth,PlayerCombat playerCombat)
     {
         position = new float[3];
         abilities = new bool[3];
@@ -24,7 +24,7 @@ public class PlayerData
         abilities[(int)GameManager.ability.WALLJHANGANDJUMP] = ab[(int)GameManager.ability.WALLJHANGANDJUMP];
         health = playerHealth.currentHP;
         maxHealth = playerHealth.maxHP;
-        damage = player.attackDamage;
+        damage = playerCombat.attackDamage;
         invicibilityProgress = progress;
     }
 
