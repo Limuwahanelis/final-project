@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour
     private bool[] abilities = new bool[3];
     public bool playerIsAlive=true;
 
+    public GameObject credits;
+
     public Text messageTex;
+
+
 
     public enum ability
     {
@@ -31,31 +35,38 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        SceneManager.sceneLoaded += WhenNewSceneIsLoaded;
         if (instance == null)
         {
             instance = this;
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
         player = GameObject.FindGameObjectWithTag("Player");
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if (Config.load) { Load(); Config.load = false; }
-        }
+        //if (SceneManager.GetActiveScene().buildIndex == 1)
+        //{
+        //    if (Config.load) { Load(); Config.load = false; }
+        //}
     }
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 2)
-        {
-            Debug.Log("loa 2+ " + SceneManager.GetActiveScene().name);
-            LoadForBoss();
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        Boss.OnGameCompleteEvent += ShowCredits;
+        //if (SceneManager.GetActiveScene().buildIndex == 2)
+        //{
+        //    Debug.Log("loa 2+ " + SceneManager.GetActiveScene().name);
+        //    LoadForBoss();
+        //}
         Debug.Log(player);
         Debug.Log("scene is " + SceneManager.GetActiveScene().buildIndex);
 
+    }
 
+    public void ShowCredits()
+    {
+        credits.SetActive(true);
     }
 
     public GameObject GetPlayer()
@@ -119,10 +130,11 @@ public class GameManager : MonoBehaviour
         abilities[(int)ability.WALLJHANGANDJUMP] = loadedData.abilities[(int)ability.WALLJHANGANDJUMP];
         player.GetComponent<PlayerHealthSystem>().SetMaxHP(loadedData.maxHealth);
         player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
+        player.GetComponent<PlayerHealthSystem>().currentHP = loadedData.health;
         player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
         player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
         invBar.SetFill(loadedData.invicibilityProgress);
-
+        Debug.Log(json);
         for(int i=0;i<3;i++)
         {
             if (abilities[i]) Destroy(abilityUnlocks[i]);
@@ -140,27 +152,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadForBoss()
     {
-        
-        string json = File.ReadAllText(Application.persistentDataPath + "/BossSave.json");
-        Debug.Log(Application.persistentDataPath);
-        Debug.Log(json);
-        PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
-        abilities[(int)ability.AIRATTACK] = loadedData.abilities[(int)ability.AIRATTACK];
-        abilities[(int)ability.BOMB] = loadedData.abilities[(int)ability.BOMB];
-        abilities[(int)ability.WALLJHANGANDJUMP] = loadedData.abilities[(int)ability.WALLJHANGANDJUMP];
-        Debug.Log("Player is" + player);
-        Debug.Log("invBar is" + invBar);
-        player.GetComponent<PlayerHealthSystem>().SetMaxHP(loadedData.maxHealth);
-        player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
-        player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
-        player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
-        invBar.SetFill(loadedData.invicibilityProgress);
+        player.transform.position = GameObject.FindGameObjectWithTag("spawn point").transform.position;
 
         Boss a = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
-        Debug.Log("Boss is " + a);
         a.SetAttack();
 
-        
     }
     public void SaveForBoss()
     {
@@ -187,10 +183,38 @@ public class GameManager : MonoBehaviour
            
             LoadForBoss();
         }
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            Debug.Log("new scene loaded");
+            player = GameObject.FindGameObjectWithTag("Player");
+            Config.load = false;
+            Load();
+        }
     }
     public void ShowGameOverScreen()
     {
         gameOverScreen.ShowScreen();
         playerIsAlive = false;
     }
+
+    public void WhenNewSceneIsLoaded(Scene scene,LoadSceneMode loadSceneMode )
+    {
+        if(scene.buildIndex==0)
+        {
+            Destroy(player);
+        }
+        if (scene.buildIndex == 1 && Config.load)
+        {
+            Debug.Log("load dasda");
+            StartCoroutine(WaitForSceneToLoad(scene.buildIndex));
+
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= WhenNewSceneIsLoaded;
+        Boss.OnGameCompleteEvent -= ShowCredits;
+    }
+
 }

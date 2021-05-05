@@ -63,6 +63,7 @@ public class LogicPuzzle2 : Puzzle
         torches[3].LightUp();
         torches[4].LightUp();
         text.text = numberToGet.ToString();
+        solved = true;
         StartCoroutine(MoveCrystalCor());
     }
 }

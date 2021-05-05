@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
     {
         Config.load = true;
         SceneManager.LoadScene(1);
+        //Destroy(GameManager.instance.GetPlayer());
     }
     public void Exit()
     {
@@ -45,5 +46,10 @@ public class MainMenu : MonoBehaviour
     {
         optionsPanel.SetActive(true);
         buttons.SetActive(false);
+    }
+
+    public void SaveSettings()
+    {
+        PlayerOptionsSaver.instance.SaveSettings();
     }
 }

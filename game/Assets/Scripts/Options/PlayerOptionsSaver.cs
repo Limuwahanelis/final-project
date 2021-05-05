@@ -6,6 +6,15 @@ public class PlayerOptionsSaver : MonoBehaviour
 {
     Settings settings;
     GlobalAudioManager audioMan;
+    public static PlayerOptionsSaver instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        } else if (instance != this) Destroy(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

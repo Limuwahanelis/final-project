@@ -6,6 +6,7 @@ public class SavePlace : MonoBehaviour
 {
     private GameManager gamMan;
     public GameObject message;
+    bool isPlayerIn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,23 +16,24 @@ public class SavePlace : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKeyDown(KeyCode.F))
+        if(isPlayerIn)
         {
-            gamMan.Save();
-            Debug.Log("saveddddd");
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                gamMan.Save();
+                Debug.Log("saveddddd");
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         message.SetActive(true);
+        isPlayerIn = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         message.SetActive(false);
+        isPlayerIn = false;
     }
 }

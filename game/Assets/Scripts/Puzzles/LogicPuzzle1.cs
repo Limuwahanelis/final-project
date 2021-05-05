@@ -33,7 +33,8 @@ public class LogicPuzzle1 : Puzzle
     }
     public override void MarkAsSolved()
     {
-        for(int i=0;i<5;i++)
+        solved = true;
+        for (int i=0;i<5;i++)
         {
             torches[i].LightUp();
             torches[i].enabled = false;

@@ -21,7 +21,9 @@ public class Beam : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-       man.GetPlayer().GetComponent<IDamagable>().TakeDamage(damage);
-       man.GetPlayer().GetComponent<IDamagable>().Knockback();
+        collision.GetComponentInParent<IDamagable>().TakeDamage(damage);
+        collision.GetComponentInParent<IDamagable>().Knockback();
+        //man.GetPlayer().GetComponent<IDamagable>().TakeDamage(damage);
+        //man.GetPlayer().GetComponent<IDamagable>().Knockback();
     }
 }
