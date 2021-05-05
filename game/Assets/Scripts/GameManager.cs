@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         Boss.OnGameCompleteEvent += ShowCredits;
         //if (SceneManager.GetActiveScene().buildIndex == 2)
         //{
@@ -133,7 +134,7 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
         player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
         invBar.SetFill(loadedData.invicibilityProgress);
-
+        Debug.Log(json);
         for(int i=0;i<3;i++)
         {
             if (abilities[i]) Destroy(abilityUnlocks[i]);
@@ -152,26 +153,9 @@ public class GameManager : MonoBehaviour
     public void LoadForBoss()
     {
         player.transform.position = GameObject.FindGameObjectWithTag("spawn point").transform.position;
-        //string json = File.ReadAllText(Application.persistentDataPath + "/BossSave.json");
-        //Debug.Log(Application.persistentDataPath);
-        //Debug.Log(json);
-        //PlayerData loadedData = JsonUtility.FromJson<PlayerData>(json);
-        //abilities[(int)ability.AIRATTACK] = loadedData.abilities[(int)ability.AIRATTACK];
-        //abilities[(int)ability.BOMB] = loadedData.abilities[(int)ability.BOMB];
-        //abilities[(int)ability.WALLJHANGANDJUMP] = loadedData.abilities[(int)ability.WALLJHANGANDJUMP];
-        //Debug.Log("Player is" + player);
-        //Debug.Log("invBar is" + invBar);
-        //player.GetComponent<PlayerHealthSystem>().SetMaxHP(loadedData.maxHealth);
-        //player.GetComponent<PlayerHealthSystem>().hpBar.SetHealth(loadedData.health);
-        ////player.GetComponent<PlayerHealthSystem>().currentHP = loadedData.maxHealth;
-        //player.GetComponent<PlayerHealthSystem>().mText.text = loadedData.health.ToString();
-        //player.GetComponent<PlayerCombat>().attackDamage = loadedData.damage;
-        //invBar.SetFill(loadedData.invicibilityProgress);
 
         Boss a = GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss>();
-        //Debug.Log("Boss is " + a);
         a.SetAttack();
-        //player.GetComponent<Player>().SetPosition(GameObject.FindGameObjectWithTag("spawn point").transform);
 
     }
     public void SaveForBoss()
@@ -202,6 +186,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 1)
         {
             Debug.Log("new scene loaded");
+            player = GameObject.FindGameObjectWithTag("Player");
             Config.load = false;
             Load();
         }

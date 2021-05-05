@@ -16743,8 +16743,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 2
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -77903,7 +77903,7 @@ RectTransform:
   m_GameObject: {fileID: 1242570356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.756633, y: 1.756633, z: 1.756633}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1812429049}
   - {fileID: 1419707892}
@@ -77914,7 +77914,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -827, y: -430.52417}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1242570358
 Animator:
@@ -80005,7 +80005,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329, y: -422}
+  m_AnchoredPosition: {x: -329, y: -236}
   m_SizeDelta: {x: 330.27844, y: 61.927208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419707893
@@ -80573,121 +80573,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.038704, y: 18.280003}
   m_EdgeRadius: 0
---- !u!1 &1462034628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7801763715194258482, guid: cb9e7c68cff6ed44d903fe9b24f066b8, type: 3}
-  m_PrefabInstance: {fileID: 1504828043}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1462034633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462034628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2a8620f45395b6498cdca06c142a81d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingAudioEvent: {fileID: 11400000, guid: e96b718c2782ded499a46f6b6b9f857a, type: 2}
-  combatAudioEvent: {fileID: 0}
---- !u!82 &1462034634
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462034628}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 0.77
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1462475468
 GameObject:
   m_ObjectHideFlags: 0
@@ -81324,10 +81209,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7801763715194258495, guid: cb9e7c68cff6ed44d903fe9b24f066b8, type: 3}
-      propertyPath: invicibilityProgress
-      value: 0.35
-      objectReference: {fileID: 0}
     - target: {fileID: 8811187578367163257, guid: cb9e7c68cff6ed44d903fe9b24f066b8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -81374,10 +81255,10 @@ RectTransform:
   m_Father: {fileID: 1080318345}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: -1820, y: -900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1518918741
 GameObject:
@@ -104079,7 +103960,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 329, y: -422}
+  m_AnchoredPosition: {x: 329, y: -236}
   m_SizeDelta: {x: 330.27844, y: 61.927208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1812429050
@@ -104295,13 +104176,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3243176110781757670, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -54.49
+      value: -55.09
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.06
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.z
