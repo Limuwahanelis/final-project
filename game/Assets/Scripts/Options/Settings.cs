@@ -26,17 +26,18 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
-        if (instance==null)
-        {
-            instance = this;
-        }
-        else if(instance!=this)
-        {
-            Destroy(gameObject);
-        }
+
     }
     void Start()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(this);
+        }
         currentResIndex.refreshRateIndex = 0;
         currentResIndex.resolutionIndex = 0;
 

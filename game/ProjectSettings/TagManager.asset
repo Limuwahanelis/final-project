@@ -18,6 +18,10 @@ TagManager:
   - Boss
   - Volume Slider
   - Information Box
+  - spawn point
+  - Main Canvas
+  - Settings
+  - Option saver
   layers:
   - Default
   - TransparentFX

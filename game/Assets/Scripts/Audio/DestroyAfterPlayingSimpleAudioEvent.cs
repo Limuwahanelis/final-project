@@ -14,4 +14,5 @@ public class DestroyAfterPlayingSimpleAudioEvent : AudioEvent
         if (audioSource.isPlaying) return;
         audioSource.Play();
     }
+    
 }

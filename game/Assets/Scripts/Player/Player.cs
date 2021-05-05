@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour//, IDamagable
 {
+    //static Player instance; 
     
     public enum Cause
     {
@@ -85,6 +86,18 @@ public class Player : MonoBehaviour//, IDamagable
 
     private Invincibility invincibility;
 
+    private void Awake()
+    {
+        //if(instance==null)
+        //{
+        //    instance = this;
+        //}
+        //if(instance!=this)
+        //{
+        //    Destroy(gameObject);
+        //}
+    }
+
     // Start is called before the first frame update
 
     void Start()
@@ -95,7 +108,7 @@ public class Player : MonoBehaviour//, IDamagable
         man = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         wallHang = GetComponent<WallHangAndJump>();
         playerStateManager = GetComponent<PlayerStateManager>();
-
+        DontDestroyOnLoad(gameObject);
     }
 
     
@@ -373,5 +386,10 @@ public class Player : MonoBehaviour//, IDamagable
         anim.SetBool("Slide", false);
         canFlipSprite = true;
         rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
+    public void SetPosition(Transform pos)
+    {
+        transform.position = pos.position;
     }
 }

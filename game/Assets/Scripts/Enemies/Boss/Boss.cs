@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Boss : Enemy,IDamagable
 {
+    public static Action OnGameCompleteEvent;
+
     public GameObject[] beams;
     private Player player;
     public Transform missileSpawn;
@@ -14,7 +17,7 @@ public class Boss : Enemy,IDamagable
     public Transform vulnerableTrans;
     public Vector3 attackPos;
     public Vector3 vulnerablePos;
-    public GameObject credits;
+    //public GameObject credits;
     public float attackDelay = 1f;
     public float vulnerableTime = 2f;
     private int attackPatten = 1;
@@ -35,7 +38,7 @@ public class Boss : Enemy,IDamagable
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
@@ -184,7 +187,7 @@ public class Boss : Enemy,IDamagable
     }
     public void ShowCredits()
     {
-        credits.SetActive(true);
+        OnGameCompleteEvent?.Invoke();
     }
     public void SetAttack()
     {

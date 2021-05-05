@@ -50,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     public void GoToMenu()
     {
         Time.timeScale = 1f;
+        Destroy(GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetPlayer());
         Destroy(GameObject.FindGameObjectWithTag("GameManager"));
         SceneManager.LoadScene(0);
     }
@@ -61,5 +62,10 @@ public class PauseMenu : MonoBehaviour
     public void HidePanel(GameObject panelToHide)
     {
         panelToHide.SetActive(false);
+    }
+
+    public void SaveSettings()
+    {
+        PlayerOptionsSaver.instance.SaveSettings();
     }
 }

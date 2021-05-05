@@ -25,4 +25,8 @@ public class CameraAudioManager : MonoBehaviour
         Debug.Log("fire");
         source.volume = mainTheme.volume*value;
     }
+    private void OnDestroy()
+    {
+        GlobalAudioManager.OnGlobalVolumeChange -= ChangeVolume;
+    }
 }

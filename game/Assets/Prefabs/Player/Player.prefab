@@ -913,8 +913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c69bab57bbe41e498881b0cdba0dd53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingAudioEvent: {fileID: 0}
-  combatAudioEvent: {fileID: 0}
+  walkingAudioEvent: {fileID: 11400000, guid: 9ed68e37433075d4a8692cb90d16a788, type: 2}
+  combatAudioEvent: {fileID: 11400000, guid: 4da80e2ffbea31145b4bfe6f9b8492f0, type: 2}
 --- !u!82 &1114071456
 AudioSource:
   m_ObjectHideFlags: 0
@@ -935,8 +935,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.9675865
+  MaxDistance: 3.4921036
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

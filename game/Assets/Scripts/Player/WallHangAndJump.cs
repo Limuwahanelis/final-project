@@ -146,6 +146,7 @@ public class WallHangAndJump : MonoBehaviour
         player.ReturnControlToPlayer(Player.Cause.WALLHANG);
         playerStateManager.isHangingOnWall = false;
         prevoiusContactSide = contactSide;
+        player.SetCanFlipSprite(true);
         //canFlipSprite = true;
         anim.SetBool("IsHanging", false);
     }
