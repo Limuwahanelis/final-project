@@ -11,3 +11,7 @@ Controls:
 - c + ↓ - after unlocking “drop bomb ” ability drops special bomb which destroys marked walls
 - c during jump - after unlocking “air attack” ability character performs attack in air
 - Esc - pause menu
+
+Game may create some files in 
+
+C:\Users\<User>\AppData\LocalLow\DefaultCompany\game
