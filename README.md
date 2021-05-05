@@ -14,4 +14,4 @@ Controls:
 
 Game may create some files in 
 
-C:\Users\<User>\AppData\LocalLow\DefaultCompany\game
+C:\Users\\\<User>\AppData\LocalLow\DefaultCompany\game
