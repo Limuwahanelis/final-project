@@ -14,6 +14,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     private Invincibility invincibility;
 
     public event Action OnAttackEvent;
+    public event Action OnAirAttackEvent;
 
     GameManager man;
     PlayerStateManager playerStateManager;
@@ -86,6 +87,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 {
                     if (canAirAttack)
                     {
+                        OnAirAttackEvent?.Invoke();
                         checkForColliders = true;
                         airAttack = true;
                         player.SetCanFlipSprite(false);
@@ -141,6 +143,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
                 {
                     if (canAirAttack)
                     {
+                        OnAirAttackEvent?.Invoke();
                         checkForColliders = true;
                         airAttack = true;
                         player.SetCanFlipSprite(false);
@@ -215,6 +218,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     void AirAttackFunc()
     {
         rb.velocity = new Vector2(0, 0);
+        
         if (!playerStateManager.isHangingOnWall) rb.gravityScale = 2;
         airAttack = false;
         player.SetCanFlipSprite(true);
