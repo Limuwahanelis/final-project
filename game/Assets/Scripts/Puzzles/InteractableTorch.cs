@@ -8,7 +8,7 @@ public class InteractableTorch : MonoBehaviour,IInteractable
     public GameObject fire;
     private GameManager gameMan;
     public GameObject canvas;
-    private bool fireActive = false;
+    public bool fireActive = false;
     public InteractableTorch torch1;
     public InteractableTorch torch2;
     public int torchIndex;

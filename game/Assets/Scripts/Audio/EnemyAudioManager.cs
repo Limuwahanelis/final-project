@@ -18,7 +18,7 @@ public class EnemyAudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         combat = GetComponent<PlayerCombat>();
         enemy = GetComponent<Enemy>();
-        enemy.OnWalkEvent += PlayWalkingSound;
+        enemy.OnAttackEvent += PlayAttackSound;
         //combat.OnAttackEvent += PlayAttackSound;
     }
 

@@ -32,6 +32,6 @@ public abstract class Enemy : MonoBehaviour
     }
     protected void RaiseOnAttackEvent()
     {
-        OnWalkEvent?.Invoke();
+        OnAttackEvent?.Invoke();
     }
 }
