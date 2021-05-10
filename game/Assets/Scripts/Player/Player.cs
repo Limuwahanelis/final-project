@@ -227,6 +227,18 @@ public class Player : MonoBehaviour//, IDamagable
                         }
                     }
                 }
+                if(!playerStateManager.isOnGround)
+                {
+                    if (man.CheckIfAbilityIsUnlocked(GameManager.ability.WALLJHANGANDJUMP))
+                    {
+                        if (wallHang.TouchesWall() && xSpeed != 0 && wallHang.WallContactSide * xSpeed > 0 && NoControlCause != Cause.KNOCKBACK)
+                        {
+                            Debug.Log("hang him");
+                            canFlipSprite = false;
+                            wallHang.HangOnWall();
+                        }
+                    }
+                }
             }
         }
     }

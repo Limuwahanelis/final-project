@@ -77,9 +77,10 @@ public class PlayerCombat : MonoBehaviour, IDamagable
     // Update is called once per frame
     void Update()
     {
+        CheckIfCanAirAttack();
         if (!player.CanNotBeMovedByPlayer())
         {
-            CheckIfCanAirAttack();
+            
             // air attack
             if (Input.GetButtonDown("Attack") && !playerStateManager.isOnGround && !playerStateManager.isHangingOnWall)
             {
