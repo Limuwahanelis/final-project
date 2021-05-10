@@ -7,8 +7,10 @@ public class Boss : Enemy,IDamagable
 {
     public static Action OnGameCompleteEvent;
 
+    public static Action OnBossMissileAttack;
+
     public GameObject[] beams;
-    private Player player;
+    private GameObject player;
     public Transform missileSpawn;
     public GameObject missilePrefab;
     public BossCrystalManager crystals;
@@ -21,7 +23,7 @@ public class Boss : Enemy,IDamagable
     public float attackDelay = 1f;
     public float vulnerableTime = 2f;
     private int attackPatten = 1;
-    private bool attack = false;
+    public bool attack = false;
     private bool isAlive = true;
     private bool moveToVulnerablePos = false;
     private bool moveToAttackPos= false;
@@ -30,7 +32,7 @@ public class Boss : Enemy,IDamagable
     {
         attackPos = attackTrans.position;
         vulnerablePos = vulnerableTrans.position;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player");
         hpSys = GetComponent<HealthSystem>();
         anim = GetComponent<Animator>();
         
@@ -38,7 +40,7 @@ public class Boss : Enemy,IDamagable
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -124,7 +126,10 @@ public class Boss : Enemy,IDamagable
         yield return new WaitForSeconds(attackDelay);
         for (int i=0;i<60;i++)
         {
+            //OnBossMissileAttack?.Invoke();
             GameObject missile =  Instantiate(missilePrefab, missileSpawn.transform.position, Quaternion.Euler(0,0,90+i*20));
+            AudioSource tmpSource = missile.AddComponent<AudioSource>();
+            GetComponent<BossAudioManager>().bossMissileAudio.Play(tmpSource);
             missile.GetComponent<Missile>().SetSpeed(10);
             yield return new WaitForSeconds(0.05f);
         }
@@ -138,6 +143,8 @@ public class Boss : Enemy,IDamagable
         {
             GameObject missile = Instantiate(missilePrefab, missileSpawn.transform.position,missilePrefab.transform.rotation);
             missile.transform.up = player.transform.position - missileSpawn.transform.position;
+            AudioSource tmpSource = missile.AddComponent<AudioSource>();
+            GetComponent<BossAudioManager>().bossMissileAudio.Play(tmpSource);
             missile.GetComponent<Missile>().SetSpeed(10);
             yield return new WaitForSeconds(0.4f);
         }

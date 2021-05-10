@@ -6,10 +6,11 @@ using UnityEngine;
 public class SingleClipAudioEvent : AudioEvent
 {
     public AudioClip audioClip;
+    public bool test;
     public override void Play(AudioSource audioSource)
     {
         audioSource.clip = audioClip;
-        audioSource.volume = volume * GlobalAudioManager.instance.globalVolume;
+        audioSource.volume = volume * (test? 1 : GlobalAudioManager.instance.globalVolume);
         audioSource.pitch = pitch;
         if (audioSource.isPlaying) return;
         audioSource.Play();
