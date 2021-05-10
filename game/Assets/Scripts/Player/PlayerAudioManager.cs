@@ -11,6 +11,8 @@ public class PlayerAudioManager : MonoBehaviour
     AudioEvent walkingAudioEvent;
     [SerializeField]
     AudioEvent combatAudioEvent;
+    [SerializeField]
+    AudioEvent airAttackAudioEvent;
 
     Player player;
     PlayerCombat combat;
@@ -22,6 +24,7 @@ public class PlayerAudioManager : MonoBehaviour
         player = GetComponent<Player>();
         player.OnWalkEvent += PlayWalkingSound;
         combat.OnAttackEvent += PlayAttackSound;
+        combat.OnAirAttackEvent += PlayAirAttackSound;
     }
 
     // Update is called once per frame
@@ -38,4 +41,16 @@ public class PlayerAudioManager : MonoBehaviour
     {
         combatAudioEvent.Play(audioSource);
     }
+    void PlayAirAttackSound()
+    {
+        airAttackAudioEvent.Play(audioSource);
+    }
+
+    void OnDestroy()
+    {
+        player.OnWalkEvent -= PlayWalkingSound;
+        combat.OnAttackEvent -= PlayAttackSound;
+        combat.OnAirAttackEvent -= PlayAirAttackSound;
+    }
+    
 }

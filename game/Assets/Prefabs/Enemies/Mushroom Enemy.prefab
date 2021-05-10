@@ -435,8 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a8620f45395b6498cdca06c142a81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingAudioEvent: {fileID: 11400000, guid: e96b718c2782ded499a46f6b6b9f857a, type: 2}
-  combatAudioEvent: {fileID: 0}
+  walkingAudioEvent: {fileID: 0}
+  combatAudioEvent: {fileID: 11400000, guid: e96b718c2782ded499a46f6b6b9f857a, type: 2}
 --- !u!61 &7801763713535736988
 BoxCollider2D:
   m_ObjectHideFlags: 0

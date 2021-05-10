@@ -67,6 +67,7 @@ public class FlyingEyeEnemy : Enemy,IDamagable
     public void Attack()
     {
         missilePrefab.transform.up = gamMan.GetPlayer().transform.position - sprite.transform.position;
+        RaiseOnAttackEvent();
         Instantiate(missilePrefab, sprite.transform.position, missilePrefab.transform.rotation);
         attackCount++;
         if(attackCount==attacksInSeries)

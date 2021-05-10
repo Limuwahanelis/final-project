@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97bb6cbfc75cb1646add69707d7a40bb, type: 3}
+  m_Name: Flying Eye Attack
+  m_EditorClassIdentifier: 
+  volume: 0.47
+  pitch: 0.5
+  audioclips:
+  - {fileID: 8300000, guid: 60b73f87006454840bde2c24205b7ae1, type: 3}
+  - {fileID: 8300000, guid: 67653de7d95b3e44e8fba53619d7cc40, type: 3}
+  - {fileID: 8300000, guid: e9ac7bdc37755c84db688c69a89ead4c, type: 3}
+  canOverride: 1

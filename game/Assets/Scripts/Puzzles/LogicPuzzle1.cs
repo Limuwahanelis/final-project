@@ -6,7 +6,7 @@ public class LogicPuzzle1 : Puzzle
 {
     private bool solved;
     public InteractableTorch[] torches = new InteractableTorch[5];
-    private bool[] torchState = new bool[5];
+    //private bool[] torchState = new bool[5];
     public GameObject hpPickUp;
     private GameManager gamMan;
     // Start is called before the first frame update
@@ -22,10 +22,10 @@ public class LogicPuzzle1 : Puzzle
     }
     public void CheckIfTorchesAreLit(int torchIndex)
     {
-        torchState[torchIndex] = true;
+        //torchState[torchIndex] = true;
         for(int i=0;i<5;i++)
         {
-            if (!torchState[i]) return;
+            if (!torches[i].fireActive) return;
         }
         solved = true;
         gamMan.MarkPuzzleAsSolved(1);
