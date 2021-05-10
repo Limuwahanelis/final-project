@@ -86,6 +86,7 @@ public class WallHangAndJump : MonoBehaviour
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
         }
+        //if(TouchesWall() && )
     }
 
     public bool TouchesWall()
@@ -119,7 +120,7 @@ public class WallHangAndJump : MonoBehaviour
     }
     public void HangOnWall()
     {
-
+        
         myCor = StartCoroutine(StickToWall());
     }
     public IEnumerator StickToWall()
