@@ -80052,9 +80052,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1080318349}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: goToMenu
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -104007,9 +104007,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1080318349}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: exit
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -104157,6 +104157,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 537058825, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
+      propertyPath: MaxDistance
+      value: 9.0506935
+      objectReference: {fileID: 0}
     - target: {fileID: 552408634, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: hpBar
       value: 
@@ -104173,6 +104177,10 @@ PrefabInstance:
       propertyPath: airAttackAudioEvent
       value: 
       objectReference: {fileID: 11400000, guid: 98fede8d0dfc63044a4488e8d8592b77, type: 2}
+    - target: {fileID: 1114071456, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
+      propertyPath: MaxDistance
+      value: 2.92
+      objectReference: {fileID: 0}
     - target: {fileID: 1903643982520058467, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -104187,11 +104195,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.18
+      value: -55.67
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.79
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 3977206451876901864, guid: 2773e6333dd99b246ba41a33820e99da, type: 3}
       propertyPath: m_LocalPosition.z
