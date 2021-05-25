@@ -24,12 +24,16 @@ public class PlayerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerCombat.OnDeathEvent += SetDeath;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    void SetDeath()
+    {
+        isAlive = false;
     }
 }
