@@ -15,6 +15,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
 
     public event Action OnAttackEvent;
     public event Action OnAirAttackEvent;
+    public static event Action OnDeathEvent;
 
     GameManager man;
     PlayerStateManager playerStateManager;
@@ -247,6 +248,7 @@ public class PlayerCombat : MonoBehaviour, IDamagable
         isInvincible = true;
         isKnockable = false;
         rb.velocity = new Vector2(0, rb.velocity.y);
+        OnDeathEvent?.Invoke();
         StopAllCoroutines();
         anim.SetTrigger("Dead");
         anim.SetBool("FallsDown", false);
