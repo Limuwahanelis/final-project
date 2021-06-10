@@ -11,12 +11,12 @@ public class Settings : MonoBehaviour
         public int refreshRateIndex;
         public int resolutionIndex;
     }
-    public static Settings instance=null;
+    public static Settings instance = null;
     Resolution[] allResolutions;
     ResIndex currentResIndex;
-    List<Resolution> resolutionsWithCurrentRefreshRate = new List<Resolution>();
     List<List<Resolution>> resolutions = new List<List<Resolution>>();
     List<int> refreshRates = new List<int>();
+    List<string> refreshRatesS = new List<string>();
     List<List<string>> resolutionOptions = new List<List<string>>();
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown refreshRateDropdown;
@@ -45,27 +45,26 @@ public class Settings : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
         refreshRateDropdown.ClearOptions();
-        List<string> refreshRatesS = new List<string>();
 
 
-        int firstRefreshRate = allResolutions[0].refreshRate;
-        refreshRates.Add(allResolutions[0].refreshRate);
-        refreshRatesS.Add(allResolutions[0].refreshRate.ToString() + " Hz");
+        FindAllRefreshRates();
 
-        int nextRefreshRate = -1;
-        int j = 1;
+        AddResolutionsToLists();
 
-        while (nextRefreshRate != firstRefreshRate)
+
+        for (int i = 0; i < resolutions.Count; i++)
         {
-            refreshRates.Add(allResolutions[j].refreshRate);
-            refreshRatesS.Add(allResolutions[j].refreshRate.ToString() + " Hz");
-            j++;
-            nextRefreshRate = allResolutions[j].refreshRate;
-
+            resolutions[i].Sort((r1, r2) => r1.height.CompareTo(r2.height));
+            resolutions[i].Sort((r1, r2) => r1.width.CompareTo(r2.width));
         }
+        refreshRateDropdown.AddOptions(refreshRatesS);
+        refreshRateDropdown.RefreshShownValue();
+        resolutionDropdown.AddOptions(resolutionOptions[0]);
 
-
-        for (int i = 0; i < j; i++)
+    }
+    private void AddResolutionsToLists()
+    {
+        for (int i = 0; i < refreshRates.Count; i++)
         {
             resolutions.Add(new List<Resolution>());
             resolutionOptions.Add(new List<string>());
@@ -74,6 +73,7 @@ public class Settings : MonoBehaviour
         for (int i = 0; i < allResolutions.Length; i++)
         {
             int refreshRateIndex = -1;
+
             for (int k = 0; k < refreshRates.Count; k++)
             {
                 if (refreshRates[k] == allResolutions[i].refreshRate)
@@ -87,20 +87,20 @@ public class Settings : MonoBehaviour
             resolutionOptions[refreshRateIndex].Add(allResolutions[i].width + " x " + allResolutions[i].height);
 
         }
-
-        for (int i = 0; i < resolutions.Count; i++)
+    }
+    private void FindAllRefreshRates()
+    {
+        for (int i = 0; i < allResolutions.Length; i++)
         {
-            resolutions[i].Sort((r1, r2) => r1.height.CompareTo(r2.height));
-            resolutions[i].Sort((r1, r2) => r1.width.CompareTo(r2.width));
+            if (!refreshRates.Exists((x) => x == allResolutions[i].refreshRate))
+            {
+                refreshRates.Add(allResolutions[i].refreshRate);
+            }
         }
-
-        refreshRateDropdown.AddOptions(refreshRatesS);
-        refreshRateDropdown.RefreshShownValue();
-        resolutionDropdown.AddOptions(resolutionOptions[0]);
-
-        if (!LoadSettings())
+        refreshRates.Sort();
+        for (int i = 0; i < refreshRates.Count; i++)
         {
-            Screen.SetResolution(resolutions[0][0].width, resolutions[0][0].height, false);
+            refreshRatesS.Add(refreshRates[i].ToString() + " Hz");
         }
 
     }
@@ -145,12 +145,27 @@ public class Settings : MonoBehaviour
                 }
             }
         }
-
-        toReturn = resolutions[refreshRateIndex][currentResIndex.resolutionIndex];
+        toReturn = FindNearestResolutionForRefreshRate(width, height, refreshRateIndex); //resolutions[refreshRateIndex][currentResIndex.resolutionIndex];
         currentResIndex.refreshRateIndex = refreshRateIndex;
         return toReturn;
     }
-
+    Resolution FindNearestResolutionForRefreshRate(int width, int height, int refreshRateIndex)
+    {
+        int minResolutionIndex = 0;
+        int difference = Mathf.Abs(resolutions[refreshRateIndex][0].width - width) + Mathf.Abs(resolutions[refreshRateIndex][0].height - height);
+        int minDifference = difference;
+        for (int i = 1; i < resolutions[refreshRateIndex].Count; i++)
+        {
+            difference = Mathf.Abs(resolutions[refreshRateIndex][i].width - width) + Mathf.Abs(resolutions[refreshRateIndex][i].height - height);
+            if (difference < minDifference)
+            {
+                minDifference = difference;
+                minResolutionIndex = i;
+            }
+        }
+        currentResIndex.resolutionIndex = minResolutionIndex;
+        return resolutions[refreshRateIndex][minResolutionIndex];
+    }
     public Resolution GetResolution()
     {
         return resolutions[currentResIndex.refreshRateIndex][currentResIndex.resolutionIndex];
@@ -159,26 +174,5 @@ public class Settings : MonoBehaviour
     public bool GetFullScreen()
     {
         return fullScreen;
-    }
-
-    private bool LoadSettings()
-    {
-
-        if (!File.Exists(Application.persistentDataPath + "/settings.json")) return false;
-
-        string json = File.ReadAllText(Application.persistentDataPath + "/settings.json");
-        SettingsData loadedSettings = JsonUtility.FromJson<SettingsData>(json);
-
-        currentResIndex.refreshRateIndex= refreshRates.FindIndex(x => x == loadedSettings.refreshRate);
-        currentResIndex.resolutionIndex = resolutions[currentResIndex.refreshRateIndex].FindIndex(x => x.height == loadedSettings.height && x.width == loadedSettings.width);
-        fullScreen = loadedSettings.fullScreen;
-        SetFullScreen(fullScreen);
-        SetResolution(currentResIndex.resolutionIndex);
-
-        refreshRateDropdown.value = currentResIndex.refreshRateIndex;
-        resolutionDropdown.value = currentResIndex.resolutionIndex;
-        if(fullScreen) fullScreenToggle.isOn = true;
-
-        return true;
     }
 }
