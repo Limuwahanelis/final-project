@@ -1,5 +1,6 @@
 # Unity
 
+This game is my Bachelor of Engineering final project with some upgrades.
 
 Controls:
 - ←,→ - moves character left or right
